@@ -16,6 +16,8 @@ class Admin_bike extends CI_Controller {
     public function index()
     {
         $this->grocery_crud->set_table('Bikes');
+	$this->grocery_crud->field_type('bike_status', 'enum', array('available', 'unavailable'));
+	$this->grocery_crud->field_type('bike_type', 'enum', array('Road', 'Touring', 'Hybrid', 'City', 'BMX', 'MTB', 'Fixed Gear', 'Child'));
         $output = $this->grocery_crud->render();
 
         $this->_example_output($output);
