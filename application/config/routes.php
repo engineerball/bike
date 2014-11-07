@@ -49,5 +49,13 @@ $route['admin/bike/update/(:any)'] = 'admin_bike/update/$1';
 $route['admin/bike/delete/(:any)'] = 'admin_bike/delete/$1';
 $route['admin/bike/(:any)'] = 'admin_bike/index/$1';
 
+$route['admin/shop'] = 'admin_shop/index';
+$route['admin/shop/add'] = 'admin_shop/add';
+$route['admin/shop/update'] = 'admin_shop/update';
+$route['admin/shop/update/(:any)'] = 'admin_shop/update/$1';
+$route['admin/shop/delete/(:any)'] = 'admin_shop/delete/$1';
+$route['admin/shop/(:any)'] = 'admin_shop/index/$1';
+
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
