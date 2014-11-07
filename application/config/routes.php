@@ -42,5 +42,12 @@ $route['default_controller'] = "welcome";
 $route['404_override'] = '';
 
 
+$route['admin/bike'] = 'admin_bike/index';
+$route['admin/bike/add'] = 'admin_bike/add';
+$route['admin/bike/update'] = 'admin_bike/update';
+$route['admin/bike/update/(:any)'] = 'admin_bike/update/$1';
+$route['admin/bike/delete/(:any)'] = 'admin_bike/delete/$1';
+$route['admin/bike/(:any)'] = 'admin_bike/index/$1';
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
