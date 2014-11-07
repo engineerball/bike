@@ -1,4 +1,3 @@
-biker
+Bike 
 =====
-
-Bike Rental System
+A system for rental bicycle from our shop
