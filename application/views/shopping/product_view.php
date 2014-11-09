@@ -2,7 +2,7 @@
 <?php 
 	if ( $this->cart->total_items() )
 	{
-		echo 'Total'.$this->cart->total_itemes().' |';
+		echo 'Total'.$this->cart->total_items().' |';
 		echo '='. number_format($this->cart->total()).'Baht';
 	} else {
 		echo 'Not found';
@@ -19,10 +19,10 @@
 	foreach ($products as $items){
 		echo "
     <tr>
-      <td>".$items->code."</td>
-      <td>".$items->name."</td>
-      <td>".$items->price."</td>
-      <td>".anchor('shopping/detail/'.$items->code, 'Buy')."</td>
+      <td>".$items->bike_id."</td>
+      <td>".$items->bike_name."</td>
+      <td>".$items->bike_hourly_rate."</td>
+      <td>".anchor('shopping/detail/'.$items->bike_id, 'Buy')."</td>
     </tr>";
 }
 ?>

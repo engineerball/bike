@@ -39,6 +39,7 @@
 */
 
 $route['default_controller'] = "welcome";
+$route['shop'] = "shopping";
 $route['404_override'] = '';
 
 

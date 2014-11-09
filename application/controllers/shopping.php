@@ -14,7 +14,7 @@ class Shopping extends CI_Controller {
         public function index()
         {
 		$data['products'] = $this->Shop->_getAll();
-	echo "aaa";
+		$this->load->view('shopping/product_view', $data);
         }
 
 	public function addCart()

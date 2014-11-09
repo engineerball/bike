@@ -13,7 +13,8 @@ class Shopping_model extends CI_Model {
 	
 	function _getDetail($code)
 	{
-		$result = $this->db->where('bike_id', $code)->get('Bikes');
+		$result = $this->db->where('bike_id', $code)->get('Bikes')->row();
+		return $result;
 	}
 
 	function _save($cart_id, $code, $price, $qty)
