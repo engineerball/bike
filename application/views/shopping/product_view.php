@@ -35,9 +35,13 @@
       <td>".$items->bike_id."</td>
       <td>".$items->bike_name."</td>
       <td>".$items->bike_hourly_rate."</td>
-      <td><img src=".base_url()."assets/uploads/files/bike/".$items->bike_photo." width='150' high='150' ></td>
-      <td>".anchor('shopping/detail/'.$items->bike_id, 'Rent')."</td>
-    </tr>";
+      <td><img src=".base_url()."assets/uploads/files/bike/".$items->bike_photo." width='150' high='150' ></td>";
+		if ( $items->bike_status == "available") {
+			echo   "<td>".anchor('shopping/detail/'.$items->bike_id, 'Rent')."</td>";
+		} else {
+			echo "<td>Not available</td>";
+		}
+    echo "</tr>";
 }
 ?>
 </table>
