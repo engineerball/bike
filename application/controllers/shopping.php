@@ -14,14 +14,27 @@ class Shopping extends CI_Controller {
         public function index()
         {
 		$data['products'] = $this->Shop->_getAll();
+		$data['shops'] = $this->Shop->_getShopDropDown();
 		$this->load->view('shopping/product_view', $data);
         }
+
+	public function viewshop($shopid)
+	{
+		if ($shopid)
+		{
+			$data['products'] = $this->Shop->_getByShop($shopid);
+			$data['shops'] = $this->Shop->_getShopDropDown();
+			$this->load->view('shopping/product_view', $data);
+		} else {
+			redirect('shopping');
+		}
+	}
 
 	public function addCart()
 	{
 		$cart = array( 
 		'id' => $this->input->post('code'),
-		'qty' => $this->input->post('qty'),
+		'qty' => '1',
 		'price' => $this->input->post('price'),
 		'name' => $this->input->post('name')
 		);

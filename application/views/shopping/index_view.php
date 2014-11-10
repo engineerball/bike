@@ -1,7 +1,7 @@
 <?php
 	if ( !$this->cart->total_items())
 	{
-		echo heading('Not found item', '1');
+		echo heading('Empty item', '1');
 		echo anchor('shopping', 'Select item');
 	} else {
 		echo anchor('shopping', 'Select item') . '|';
@@ -26,7 +26,6 @@
     <td class="tg-031e"><?php echo $items['qty']; ?></td>
     <td class="tg-031e"><?php echo number_format($items['price'], 2); ?></td>
     <td class="tg-031e"><?php echo number_format($items['subtotal'], 2); ?></td>
-    <td class="tg-031e"><?php echo anchor('shopping/detail/'.$items['id'], 'Edit'); ?></td>
     <td class="tg-031e"><?php echo anchor('shopping/remove/'.$items['rowid'], 'Delete'); ?></td>
   </tr>
 
