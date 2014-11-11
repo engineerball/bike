@@ -72,18 +72,23 @@ class Shopping extends CI_Controller {
 
 	public function checkout()
 	{
-		if ($this->cart->total_items())
+		if ($this->session->userdata('username'))
 		{
-			$cart_id = $this->session->userdata('session_id');
-			$items = $this->cart->contents();
-			foreach ($items as $item)
+			if ($this->cart->total_items())
 			{
-				$this->Shop->_save($cart_id, $item['id'], $item['price'], $item['qty']);
+				$cart_id = $this->session->userdata('session_id');
+				$items = $this->cart->contents();
+				foreach ($items as $item)
+				{
+					$this->Shop->_save($cart_id, $item['id'], $item['price'], $item['qty']);
+				}
+				$this->cart->destroy();
+				echo 'Add to cast successfull';
+			} else {
+				echo 'Not found item in a order';
 			}
-			$this->cart->destroy();
-			echo 'Add to cast successfull';
 		} else {
-			echo 'Not found item in a order';
+			redirect('renters/login');
 		}
 	}
 				
