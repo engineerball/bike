@@ -1,4 +1,5 @@
 <?php 
+	echo 'Hello <b>'.$this->session->userdata('username').'</b> | ' ; 
 	echo anchor('shopping/cart', 'Item in cart '); 
 	echo ' | ';
         echo anchor('shopping', 'Select item ');

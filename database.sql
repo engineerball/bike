@@ -105,12 +105,11 @@ DROP TABLE IF EXISTS `Rental`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Rental` (
   `rent_id` int(11) NOT NULL AUTO_INCREMENT,
-  `Rental_rate_rental_rate_id` int(11) NOT NULL,
+  `rent_transaction_id` varchar(50) NOT NULL,
   `renter_renter_id` int(11) NOT NULL,
   `Bike_bike_id` int(11) NOT NULL,
   `booked_start_datetime` timestamp NULL DEFAULT NULL,
   `booked_end_datetime` timestamp NULL DEFAULT NULL,
-  `actual_start_datetime` timestamp NULL DEFAULT NULL,
   `actual_end_datetime` timestamp NULL DEFAULT NULL,
   `all_day_rental` varchar(45) NOT NULL,
   `Payment_payment_id` int(11) NOT NULL,
@@ -143,12 +142,13 @@ DROP TABLE IF EXISTS `Renters`;
 CREATE TABLE `Renters` (
   `renter_id` int(11) NOT NULL AUTO_INCREMENT,
   `renter_name` varchar(255) NOT NULL,
-  `renter_id_card` int(13) NOT NULL,
+  `renter_id_card` varchar(13) NOT NULL,
   `renter_phone` varchar(10) NOT NULL,
-  `renter_registration_date_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `renter_last_rental_date_time` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`renter_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `renter_username` varchar(50) NOT NULL,
+  `renter_email` varchar(255) NOT NULL,
+  `renter_password` varchar(50) NOT NULL,
+  PRIMARY KEY (`renter_id`,`renter_email`,`renter_username`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,6 +157,7 @@ CREATE TABLE `Renters` (
 
 LOCK TABLES `Renters` WRITE;
 /*!40000 ALTER TABLE `Renters` DISABLE KEYS */;
+INSERT INTO `Renters` VALUES (1,'aaa','1111111111111','1111111111','aaaa','a@mail.com','74b87337454200d4d33f80c4663dc5e5'),(2,'aaa','2222222222222','1111111111','aaaa1','b@mail.com','74b87337454200d4d33f80c4663dc5e5'),(3,'bbb','333333333333','1111111111','bbaa','engineerball@gmail.com','0003b904ac5b9a27a9c942bed2df6f12'),(4,'cccc','444444444444','1111111111','ccc','cc@mail.com','2cfd4560539f887a5e420412b370b361'),(5,'ball','555555555555','0835129931','ball','a@mail.c0m','7a10ea1b9b2872da9f375002c44ddfce'),(6,'aaa','2121212121212','1111111111','aaaa11','b2@mail.com','74b87337454200d4d33f80c4663dc5e5');
 /*!40000 ALTER TABLE `Renters` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -211,7 +212,7 @@ CREATE TABLE `ci_sessions` (
 
 LOCK TABLES `ci_sessions` WRITE;
 /*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
-INSERT INTO `ci_sessions` VALUES ('a87de11617b133893ce709555670edae','192.168.56.1','Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36',1415551981,'a:1:{s:13:\"cart_contents\";a:4:{s:32:\"eccbc87e4b5ce2fe28308fd9f2a7baf3\";a:6:{s:5:\"rowid\";s:32:\"eccbc87e4b5ce2fe28308fd9f2a7baf3\";s:2:\"id\";s:1:\"3\";s:3:\"qty\";s:1:\"1\";s:5:\"price\";s:2:\"10\";s:4:\"name\";s:5:\"Brown\";s:8:\"subtotal\";i:10;}s:32:\"a87ff679a2f3e71d9181a67b7542122c\";a:6:{s:5:\"rowid\";s:32:\"a87ff679a2f3e71d9181a67b7542122c\";s:2:\"id\";s:1:\"4\";s:3:\"qty\";s:1:\"1\";s:5:\"price\";s:2:\"10\";s:4:\"name\";s:7:\"BMX1001\";s:8:\"subtotal\";i:10;}s:11:\"total_items\";i:2;s:10:\"cart_total\";i:20;}}');
+INSERT INTO `ci_sessions` VALUES ('d76a8ab48a193d359c6222d648f37364','192.168.56.1','Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36',1415649913,'');
 /*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -224,4 +225,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-10  8:48:37
+-- Dump completed on 2014-11-11  9:52:01

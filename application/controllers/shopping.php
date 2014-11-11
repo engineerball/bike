@@ -9,6 +9,9 @@ class Shopping extends CI_Controller {
                 $this->load->helper(array('url','html','form'));
                 $this->load->library(array('cart','session'));
                 $this->load->model('Shopping_model','Shop');
+		
+		$this->load->library('grocery_CRUD');
+
         }
 
         public function index()
@@ -83,6 +86,7 @@ class Shopping extends CI_Controller {
 			echo 'Not found item in a order';
 		}
 	}
+				
 }
 /* End of file shopping.php */
 /* Location: ./application/controllers/shopping.php */
