@@ -61,6 +61,7 @@ class Shopping extends CI_Controller {
 	public function cart()
 	{
 		$data['cart'] = $this->cart->contents();
+		$this->session->set_flashdata('redirectToCurrent', current_url());
 		$this->load->view('shopping/index_view', $data);
 	}
 

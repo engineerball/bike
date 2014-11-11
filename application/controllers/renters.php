@@ -91,7 +91,8 @@ class Renters extends CI_Controller {
 						'logged' => TRUE
 					);
 					$this->session->set_userdata($data);
-					redirect('shopping');
+#					redirect('shopping');
+					redirect($this->session->flashdata('redirectToCurrent'));
 				} else {
 					$this->session->set_flashdata('msg_error', 'Invalid password');
 					$this->load->view('renters/form_view');
@@ -106,6 +107,6 @@ class Renters extends CI_Controller {
 	function logout()
 	{
 		$this->session->sess_destroy();
-		redirect('renters/login');
+		redirect('shopping/index');
 	}
 }
