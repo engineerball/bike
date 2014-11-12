@@ -33,3 +33,55 @@
 </head>
 
 <body>
+<div class="container">
+  <div class="row clearfix">
+    <div class="col-md-12 column">
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#">Brand</a>
+        </div>
+        
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bicycle Type<strong class="caret"></strong></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="#">Type A</a>
+                </li>
+                <li>
+                  <a href="#">Type B</a>
+                </li>
+                <li>
+                  <a href="#">Type C</a>
+                </li>               
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="#">Item(0)</a>
+            </li>
+            <li class="dropdown">
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Member<strong class="caret"></strong></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="#">Register | Log in | Log out</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        
+      </nav>
+      <ul class="breadcrumb">
+        <li>
+          <a href="#">Home</a> <span class="divider">/</span>
+        </li>
+        <li>
+          <a href="#">Library</a> <span class="divider">/</span>
+        </li>
+        <li class="active">
+          Data
+        </li>
+      </ul>
