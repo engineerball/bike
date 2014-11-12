@@ -15,102 +15,46 @@
 			<div class="row clearfix">
 				<div class="col-md-12 column">
 					<div class="row clearfix">
+<?php
+	foreach ($products as $items){
+?>
 						<div class="col-md-4 column">
-							<img alt="140x140" src="http://lorempixel.com/140/140/" />
+							<img alt="140x140" src="<?php echo base_url()."assets/uploads/files/bike/".$items->bike_photo; ?>" />
 							<dl>
 								<dt>
-									Description lists
+									<?php echo $items->bike_name; ?>
 								</dt>
 								<dd>
-									A description list is perfect for defining terms.
+									ID : <?php echo $items->bike_id; ?>	
+								</dd>
+								<dd>
+									Rental rate : <?php echo $items->bike_hourly_rate; ?>
 								</dd>
 								<dt>
-									Euismod
+									Description	
 								</dt>
 								<dd>
-									Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.
+									<?php echo $items->bike_desc; ?>
 								</dd>
-								<dd>
-									Donec id elit non mi porta gravida at eget metus.
-								</dd>
-								<dt>
-									Malesuada porta
-								</dt>
-								<dd>
-									Etiam porta sem malesuada magna mollis euismod.
-								</dd>
-								<dt>
-									Felis euismod semper eget lacinia
-								</dt>
-								<dd>
-									Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-								</dd>
-							</dl> <button type="button" class="btn btn-primary">Default</button>
+							</dl>
+							<form action="<?php echo base_url().'shopping/detail/'.$items->bike_id; ?>" method="get">
+<?php
+	if ( $items->bike_status == "available") { 
+echo   anchor('shopping/detail/'.$items->bike_id, 'Rent');
+?>
+
+							<button type="button" class="btn btn-primary">Rent</button>
+<?php
+	} else { 
+?>
+							<button type="button" class="btn btn-lg" disabled="disabled">Rent</button>
+<?php }
+?>
+							</form>
 						</div>
-						<div class="col-md-4 column">
-							<img alt="140x140" src="http://lorempixel.com/140/140/" />
-							<dl>
-								<dt>
-									Description lists
-								</dt>
-								<dd>
-									A description list is perfect for defining terms.
-								</dd>
-								<dt>
-									Euismod
-								</dt>
-								<dd>
-									Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.
-								</dd>
-								<dd>
-									Donec id elit non mi porta gravida at eget metus.
-								</dd>
-								<dt>
-									Malesuada porta
-								</dt>
-								<dd>
-									Etiam porta sem malesuada magna mollis euismod.
-								</dd>
-								<dt>
-									Felis euismod semper eget lacinia
-								</dt>
-								<dd>
-									Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-								</dd>
-							</dl> <button type="button" class="btn btn-primary">Default</button>
-						</div>
-						<div class="col-md-4 column">
-							<img alt="140x140" src="http://lorempixel.com/140/140/" />
-							<dl>
-								<dt>
-									Description lists
-								</dt>
-								<dd>
-									A description list is perfect for defining terms.
-								</dd>
-								<dt>
-									Euismod
-								</dt>
-								<dd>
-									Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.
-								</dd>
-								<dd>
-									Donec id elit non mi porta gravida at eget metus.
-								</dd>
-								<dt>
-									Malesuada porta
-								</dt>
-								<dd>
-									Etiam porta sem malesuada magna mollis euismod.
-								</dd>
-								<dt>
-									Felis euismod semper eget lacinia
-								</dt>
-								<dd>
-									Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-								</dd>
-							</dl> <button type="button" class="btn btn-primary">Default</button>
-						</div>
+<?php	
+	}
+?>
 					</div>
 				</div>
 			</div>

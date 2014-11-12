@@ -60,15 +60,6 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="<?php echo base_url().'shopping/cart'; ?>">
-		<?php 
-			if ( $this->cart->total_items() ) {
-				echo 'Item ('.$this->cart->total_items().')';
-			} else {
-				echo 'Item (0)';
-			}
-		?>
-	      </a>
             </li>
             <li class="dropdown">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -88,7 +79,7 @@
 				echo '<a href="'.base_url().'renters/logout">Log Out</a>';
 			} else {
 				echo '<a href="'.base_url().'renters/login">Log In</a>';
-				echo '<a href="'.base_url().'renters/signup">Register</a>';
+				echo '<a href="'.base_url().'renters/register">Register</a>';
 			}
 		?>
                 </li>
@@ -109,3 +100,70 @@
           Data
         </li>
       </ul>
+<?php
+        if($this->session->flashdata('msg_error'))
+        {
+                echo $this->session->flashdata('msg_error');
+        }
+?>
+
+			<?php echo form_open('renters/dosignup'); ?>
+			<div class="form-group">
+					 <label for="name" class="col-sm-2 control-label">Name</label>
+					<div class="col-sm-10">
+						 <?php 
+							echo form_error('name', '<font color=red>', '</font><br \>');
+							echo form_input('name', set_value('name')).'<br />'; ?>
+
+					</div>
+			</div>
+			<div class="form-group">
+					 <label for="IDCard" class="col-sm-2 control-label">ID Card/Passport</label>
+					<div class="col-sm-10">
+						 <?php 
+							echo form_error('idcard', '<font color=red>', '</font><br \>');
+							echo form_input('idcard', set_value('idcard')).'<br />'; ?>
+
+					</div>
+			</div>
+			<div class="form-group">
+					 <label for="MobilePhone" class="col-sm-2 control-label">Mobile Phone</label>
+					<div class="col-sm-10">
+						 <?php 
+							echo form_error('tel', '<font color=red>', '</font><br \>');
+							echo form_input('tel', set_value('tel')).'<br />'; ?>
+
+					</div>
+			</div>
+			<div class="form-group">
+					 <label for="EMail" class="col-sm-2 control-label">E-Mail</label>
+					<div class="col-sm-10">
+						 <?php 
+							echo form_error('email', '<font color=red>', '</font><br \>');
+							echo form_input('email', set_value('email')).'<br />'; ?>
+
+					</div>
+			</div>
+			<div class="form-group">
+					 <label for="Username" class="col-sm-2 control-label">Username</label>
+					<div class="col-sm-10">
+						 <?php 
+							echo form_error('username', '<font color=red>', '</font><br \>');
+							echo form_input('username', set_value('username')).'<br />'; ?>
+
+					</div>
+			</div>
+			<div class="form-group">
+					 <label for="password" class="col-sm-2 control-label">Password</label>
+					<div class="col-sm-10">
+						<?php 
+							echo form_error('password', '<font color=red>', '</font><br \>');
+							echo form_password('password', set_value('password')).'<br />'; ?>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<?php  echo form_submit('submit', 'Sign Up');?>
+					</div>
+				</div>
+			<?php form_close(); ?>

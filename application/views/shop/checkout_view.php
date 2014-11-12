@@ -1,3 +1,14 @@
+<?php
+        if ( !$this->cart->total_items())
+        {
+                echo heading('Empty item', '1');
+                echo anchor('shopping', 'Select item');
+        } else {
+                echo anchor('shopping', 'Select item') . '|';
+                echo anchor('shopping/checkout', 'Confirm rent') . '|';
+                echo anchor('shopping/destroy', 'Cancel rent');
+?>
+
 			<div class="row clearfix">
 				<div class="col-md-12 column">
 					<table class="table">
@@ -7,91 +18,55 @@
 									#
 								</th>
 								<th>
-									Product
+									Name
 								</th>
 								<th>
-									Payment Taken
+									Rent Price
 								</th>
 								<th>
-									Status
+									Deposit
 								</th>
 							</tr>
 						</thead>
+		<?php
+			foreach ($cart as $items):
+		?>
 						<tbody>
 							<tr>
 								<td>
-									1
+									#
 								</td>
 								<td>
-									TB - Monthly
+									<?php echo anchor('shopping/detail/'.$items['id'], $items['name']); ?>
 								</td>
 								<td>
-									01/04/2012
+									<?php echo number_format($items['price'], 2); ?>
 								</td>
 								<td>
-									Default
+									<?php echo number_format($items['price'], 2); ?>
 								</td>
 							</tr>
-							<tr class="active">
-								<td>
-									1
-								</td>
-								<td>
-									TB - Monthly
-								</td>
-								<td>
-									01/04/2012
-								</td>
-								<td>
-									Approved
-								</td>
-							</tr>
+<?php
+	endforeach;
+?>
 							<tr class="success">
 								<td>
-									2
+									Total
 								</td>
+								<td></td>
+								<td></td>
 								<td>
-									TB - Monthly
-								</td>
-								<td>
-									02/04/2012
-								</td>
-								<td>
-									Declined
-								</td>
-							</tr>
-							<tr class="warning">
-								<td>
-									3
-								</td>
-								<td>
-									TB - Monthly
-								</td>
-								<td>
-									03/04/2012
-								</td>
-								<td>
-									Pending
-								</td>
-							</tr>
-							<tr class="danger">
-								<td>
-									4
-								</td>
-								<td>
-									TB - Monthly
-								</td>
-								<td>
-									04/04/2012
-								</td>
-								<td>
-									Call in to confirm
+									<strong><?php echo number_format($this->cart->total()); ?></strong>
 								</td>
 							</tr>
 						</tbody>
-					</table> <button type="button" class="btn btn-default">Default</button>
+					</table> <button type="button" class="btn btn-default">Confim</button>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+<?php
+}
+?>

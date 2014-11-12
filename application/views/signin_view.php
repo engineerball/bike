@@ -60,15 +60,6 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="<?php echo base_url().'shopping/cart'; ?>">
-		<?php 
-			if ( $this->cart->total_items() ) {
-				echo 'Item ('.$this->cart->total_items().')';
-			} else {
-				echo 'Item (0)';
-			}
-		?>
-	      </a>
             </li>
             <li class="dropdown">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -88,7 +79,7 @@
 				echo '<a href="'.base_url().'renters/logout">Log Out</a>';
 			} else {
 				echo '<a href="'.base_url().'renters/login">Log In</a>';
-				echo '<a href="'.base_url().'renters/signup">Register</a>';
+				echo '<a href="'.base_url().'renters/register">Register</a>';
 			}
 		?>
                 </li>
@@ -109,3 +100,41 @@
           Data
         </li>
       </ul>
+<?php
+        if($this->session->flashdata('msg_error'))
+        {
+                echo $this->session->flashdata('msg_error');
+        }
+?>
+
+			<?php echo form_open('renters/dologin'); ?>
+				<div class="form-group">
+					 <label for="username" class="col-sm-2 control-label">Username</label>
+					<div class="col-sm-10">
+						 <?php 
+							echo form_error('username', '<font color=red>', '</font><br \>');
+							echo form_input('username', set_value('username')).'<br />'; ?>
+
+					</div>
+				</div>
+				<div class="form-group">
+					 <label for="password" class="col-sm-2 control-label">Password</label>
+					<div class="col-sm-10">
+						<?php 
+							echo form_error('password', '<font color=red>', '</font><br \>');
+							echo form_password('password', set_value('password')).'<br />'; ?>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<div class="checkbox">
+							 <label><input type="checkbox" /> Remember me</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<?php  echo form_submit('submit', 'Log in');?>
+					</div>
+				</div>
+			<?php form_close(); ?>

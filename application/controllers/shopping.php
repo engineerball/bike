@@ -18,7 +18,9 @@ class Shopping extends CI_Controller {
         {
 		$data['products'] = $this->Shop->_getAll();
 		$data['shops'] = $this->Shop->_getShopDropDown();
-		$this->load->view('shopping/product_view', $data);
+		#$this->load->view('shopping/product_view', $data);
+		$data['main_content'] = 'shop/index_view';
+		$this->load->view('includes/template', $data);
         }
 
 	public function viewshop($shopid)
@@ -27,7 +29,10 @@ class Shopping extends CI_Controller {
 		{
 			$data['products'] = $this->Shop->_getByShop($shopid);
 			$data['shops'] = $this->Shop->_getShopDropDown();
-			$this->load->view('shopping/product_view', $data);
+			
+			#$this->load->view('shopping/product_view', $data);
+			$data['main_content'] = 'shop/index_view';
+			$this->load->view('includes/template', $data);
 		} else {
 			redirect('shopping');
 		}
@@ -62,13 +67,18 @@ class Shopping extends CI_Controller {
 	{
 		$data['cart'] = $this->cart->contents();
 		$this->session->set_flashdata('redirectToCurrent', current_url());
-		$this->load->view('shopping/index_view', $data);
+		#$this->load->view('shopping/index_view', $data);
+
+                $data['main_content'] = 'shop/checkout_view';
+                $this->load->view('includes/template', $data);
+       
 	}
 
 	public function detail($code)
 	{
 		$data['products'] = $this->Shop->_getDetail($code);
-		$this->load->view('shopping/detail_view', $data);
+		$data['main_content'] = 'shopping/detail_view';
+		$this->load->view('includes/template', $data);
 	}
 
 	public function checkout()

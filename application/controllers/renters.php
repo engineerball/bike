@@ -23,7 +23,7 @@ class Renters extends CI_Controller {
 
 	function signup()
 	{
-		 $this->load->view('renters/signup_view');
+		 $this->load->view('signup_view');
 	}
 	
 	function dosignup()
@@ -56,7 +56,7 @@ class Renters extends CI_Controller {
 
 		if (!$this->form_validation->run() == FALSE )
 		{
-			$this->load->view('renters/signup_view');
+			$this->load->view('signup_view');
 		} else {
 	                $this->Renters->_addUser($member_data);
                         redirect('renters/login');
@@ -69,7 +69,8 @@ class Renters extends CI_Controller {
 	
 	function login()
 	{
-		$this->load->view('renters/form_view');
+		#$data['main_content'] = 'renters/form_view';
+		$this->load->view('signin_view');
 	}
 
 	function dologin()
@@ -95,7 +96,7 @@ class Renters extends CI_Controller {
 					redirect($this->session->flashdata('redirectToCurrent'));
 				} else {
 					$this->session->set_flashdata('msg_error', 'Invalid password');
-					$this->load->view('renters/form_view');
+					$this->load->view('signin_view');
 				}
 			} else {
 				redirect('renters/login');
