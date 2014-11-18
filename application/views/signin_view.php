@@ -79,7 +79,7 @@
 				echo '<a href="'.base_url().'renters/logout">Log Out</a>';
 			} else {
 				echo '<a href="'.base_url().'renters/login">Log In</a>';
-				echo '<a href="'.base_url().'renters/register">Register</a>';
+				echo '<a href="'.base_url().'renters/signup">Register</a>';
 			}
 		?>
                 </li>

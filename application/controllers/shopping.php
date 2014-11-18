@@ -42,7 +42,7 @@ class Shopping extends CI_Controller {
 	{
 		$cart = array( 
 		'id' => $this->input->post('code'),
-		'qty' => '1',
+		'qty' => $this->input->post('qty'),
 		'price' => $this->input->post('price'),
 		'name' => $this->input->post('name')
 		);
@@ -88,13 +88,16 @@ class Shopping extends CI_Controller {
 			if ($this->cart->total_items())
 			{
 				$cart_id = $this->session->userdata('session_id');
+				$now = date("Y-m-d H:i:s");
 				$items = $this->cart->contents();
 				foreach ($items as $item)
 				{
-					$this->Shop->_save($cart_id, $item['id'], $item['price'], $item['qty']);
+					//$this->Shop->_save($cart_id,$item['price'],$item['qty'], $item['Bikes_bike_id'], $item['Renters_renter_id'], $now);
+					$this->Shop->_save($cart_id,$item['price'],$item['qty'], $item['id'], '8', $now);
 				}
 				$this->cart->destroy();
-				echo 'Add to cast successfull';
+				redirect('/', 'refresh');
+				echo 'Add to cart successfull';
 			} else {
 				echo 'Not found item in a order';
 			}

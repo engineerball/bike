@@ -7,8 +7,8 @@
       <b>Name</b>: <?php echo $products->bike_name; ?><br />
       <b>Type</b>: <?php echo $products->bike_type; ?><br />
       <b>Store</b>: <?php echo $products->shop_name; ?><br />
+      <b>Price</b>: <?php echo number_format($products->bike_price, 2); ?><br />
       <b>Description</b>: <p><?php echo $products->bike_desc; ?></p><br />
-      <b>Price</b>: <?php echo number_format($products->bike_hourly_rate, 2); ?><br />
     </td>
   </tr>
   <tr>
@@ -17,8 +17,8 @@
 	echo form_open("shopping/addCart");
 	echo form_hidden("code", $products->bike_id);
 	echo form_hidden("name", $products->bike_name);
-	echo form_hidden("price", $products->bike_hourly_rate);
-	#echo "<b>Total</b>:".form_dropdown('qty',array('1'=>'1'));
+	echo form_hidden("price", $products->bike_price);
+	echo "<b>Total</b>:".form_dropdown('qty',array('1'=>'1','2'=>'2'),1);
 	echo form_submit("submit", "Add");
 	echo form_close();
       ?>	

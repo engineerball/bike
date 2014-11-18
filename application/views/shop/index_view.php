@@ -25,31 +25,15 @@
 									<?php echo $items->bike_name; ?>
 								</dt>
 								<dd>
-									ID : <?php echo $items->bike_id; ?>	
-								</dd>
-								<dd>
-									Rental rate : <?php echo $items->bike_hourly_rate; ?>
-								</dd>
-								<dt>
-									Description	
-								</dt>
-								<dd>
 									<?php echo $items->bike_desc; ?>
 								</dd>
 							</dl>
 							<form action="<?php echo base_url().'shopping/detail/'.$items->bike_id; ?>" method="get">
 <?php
-	if ( $items->bike_status == "available") { 
-echo   anchor('shopping/detail/'.$items->bike_id, 'Rent');
+echo   anchor('shopping/detail/'.$items->bike_id, 'Add');
 ?>
 
-							<button type="button" class="btn btn-primary">Rent</button>
-<?php
-	} else { 
-?>
-							<button type="button" class="btn btn-lg" disabled="disabled">Rent</button>
-<?php }
-?>
+							<button type="button" class="btn btn-primary">Add</button>
 							</form>
 						</div>
 <?php	

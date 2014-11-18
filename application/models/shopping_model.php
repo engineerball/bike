@@ -39,13 +39,15 @@ class Shopping_model extends CI_Model {
 		return $query;
 	}
 
-	function _save($cart_id, $code, $price, $qty)
+	function _save($cart_id, $price, $qty, $code, $member_id, $time)
 	{
 		$result = $this->db->set('cart_id', $cart_id)
-				->set('code', $code)
+				->set('Bikes_bike_id', $code)
 				->set('price', $price)
 				->set('qty', $qty)
-				->insert('cart');
+				->set('Renters_renter_id', $member_id)
+				->set('transaction_date', $time)
+				->insert('Cart');
 	}
 }
 

@@ -21,10 +21,13 @@
 									Name
 								</th>
 								<th>
-									Rent Price
+									Quantity
 								</th>
 								<th>
-									Deposit
+									Price
+								</th>
+								<th>
+										
 								</th>
 							</tr>
 						</thead>
@@ -40,23 +43,24 @@
 									<?php echo anchor('shopping/detail/'.$items['id'], $items['name']); ?>
 								</td>
 								<td>
-									<?php echo number_format($items['price'], 2); ?>
+									<?php echo number_format($items['qty'], 0); ?>
 								</td>
 								<td>
 									<?php echo number_format($items['price'], 2); ?>
+								</td>
+								<td>
+									<?php echo anchor('shopping/remove/'.$items['rowid'], 'Remove'); ?>
 								</td>
 							</tr>
 <?php
 	endforeach;
 ?>
 							<tr class="success">
-								<td>
-									Total
-								</td>
 								<td></td>
 								<td></td>
+								<td><strong>Total</strong></td>
 								<td>
-									<strong><?php echo number_format($this->cart->total()); ?></strong>
+									<strong><?php echo number_format($this->cart->total(), 2); ?></strong>
 								</td>
 							</tr>
 						</tbody>
