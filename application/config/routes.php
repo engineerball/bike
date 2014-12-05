@@ -41,7 +41,7 @@
 $route['default_controller'] = "shopping";
 $route['renters'] = "renters";
 $route['404_override'] = '';
-
+$route['checkout'] = 'checkout';
 
 $route['admin/bike'] = 'admin_bike/index';
 $route['admin/bike/add'] = 'admin_bike/add';
