@@ -13,6 +13,8 @@ class Admin_category extends CI_Controller
     function index()
     {
         $this->grocery_crud->set_table('categories');
+        $this->grocery_crud->set_theme('twitter-bootstrap');
+        #$this->grocery_crud->unset_jquery();
         $data = $this->grocery_crud->render();
         $this->_example_output($data);
       
@@ -20,7 +22,8 @@ class Admin_category extends CI_Controller
 
     function _example_output($output = NULL)
     {
-        $this->load->view('example.php', $output);
+        #$this->load->view('admin/category_view.php', $output);
+        $this->load->view('admin/template.php', $output);
     }
 
 }

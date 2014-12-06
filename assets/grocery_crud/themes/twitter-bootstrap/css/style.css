@@ -11,3 +11,31 @@
 	background:url('images/loading.gif') left top no-repeat;
 	padding-left: 30px;
 }
+
+.navcontainer ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.navcontainer li {
+    float: left;
+    display: inline;
+} 
+
+.navcontainer a:link, a:visited {
+    display: block;
+    width: 120px;
+    font-weight: bold;
+    color: #000;
+    /*background-color: #98bf21;*/
+    text-align: center;
+    padding: 4px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.navcontainer a:hover, a:active {
+    background-color: #7A991A;
+}

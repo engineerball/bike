@@ -43,19 +43,12 @@ $route['renters'] = "renters";
 $route['404_override'] = '';
 $route['checkout'] = 'checkout';
 
-$route['admin/bike'] = 'admin_bike/index';
-$route['admin/bike/add'] = 'admin_bike/add';
-$route['admin/bike/update'] = 'admin_bike/update';
-$route['admin/bike/update/(:any)'] = 'admin_bike/update/$1';
-$route['admin/bike/delete/(:any)'] = 'admin_bike/delete/$1';
-$route['admin/bike/(:any)'] = 'admin_bike/index/$1';
-
-$route['admin/shop'] = 'admin_shop/index';
-$route['admin/shop/add'] = 'admin_shop/add';
-$route['admin/shop/update'] = 'admin_shop/update';
-$route['admin/shop/update/(:any)'] = 'admin_shop/update/$1';
-$route['admin/shop/delete/(:any)'] = 'admin_shop/delete/$1';
-$route['admin/shop/(:any)'] = 'admin_shop/index/$1';
+$route['admin'] = 'admin_product/index';
+$route['admin/add'] = 'admin_product/add';
+$route['admin/update'] = 'admin_product/update';
+$route['admin/update/(:any)'] = 'admin_product/update/$1';
+$route['admin/delete/(:any)'] = 'admin_product/delete/$1';
+$route['admin/(:any)'] = 'admin_product/index/$1';
 
 $route['admin/product'] = 'admin_product/index';
 $route['admin/product/add'] = 'admin_product/add';
