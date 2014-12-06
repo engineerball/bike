@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "shopping";
+$route['default_controller'] = "shop2";
 $route['renters'] = "renters";
 $route['404_override'] = '';
 $route['checkout'] = 'checkout';
@@ -57,6 +57,19 @@ $route['admin/shop/update/(:any)'] = 'admin_shop/update/$1';
 $route['admin/shop/delete/(:any)'] = 'admin_shop/delete/$1';
 $route['admin/shop/(:any)'] = 'admin_shop/index/$1';
 
+$route['admin/product'] = 'admin_product/index';
+$route['admin/product/add'] = 'admin_product/add';
+$route['admin/product/update'] = 'admin_product/update';
+$route['admin/product/update/(:any)'] = 'admin_product/update/$1';
+$route['admin/product/delete/(:any)'] = 'admin_product/delete/$1';
+$route['admin/product/(:any)'] = 'admin_product/index/$1';
+
+$route['admin/category'] = 'admin_category/index';
+$route['admin/category/add'] = 'admin_category/add';
+$route['admin/category/update'] = 'admin_category/update';
+$route['admin/category/update/(:any)'] = 'admin_category/update/$1';
+$route['admin/category/delete/(:any)'] = 'admin_category/delete/$1';
+$route['admin/category/(:any)'] = 'admin_category/index/$1';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

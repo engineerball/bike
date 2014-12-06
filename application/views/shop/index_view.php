@@ -16,25 +16,18 @@
 				<div class="col-md-12 column">
 					<div class="row clearfix">
 <?php
-	foreach ($products as $items){
+	foreach ($products as $item){
 ?>
 						<div class="col-md-4 column">
-							<img alt="140x140" src="<?php echo base_url()."assets/uploads/files/bike/".$items->bike_photo; ?>" />
+							<img alt="140x140" src="<?php echo base_url()."assets/uploads/files/products/".$item->images; ?>" />
 							<dl>
 								<dt>
-									<?php echo $items->bike_name; ?>
+                                <a href="<?php echo base_url().'shop2/product/'.$item->id ; ?>" ><?php echo $item->name; ?></a>
 								</dt>
 								<dd>
-									<?php echo $items->bike_desc; ?>
+									<?php echo "Price : ". $item->price; ?>
 								</dd>
 							</dl>
-							<form action="<?php echo base_url().'shopping/detail/'.$items->bike_id; ?>" method="get">
-<?php
-echo   anchor('shopping/detail/'.$items->bike_id, 'Add');
-?>
-
-							<button type="button" class="btn btn-primary">Add</button>
-							</form>
 						</div>
 <?php	
 	}

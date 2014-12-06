@@ -2,10 +2,10 @@
         if ( !$this->cart->total_items())
         {
                 echo heading('Empty item', '1');
-                echo anchor('/', 'Select item');
+                echo anchor('shop2', 'Select item');
         } else {
-                echo anchor('/', 'Select item') . ' | ';
-                echo anchor('/shop2/checkout', 'Confirm') . ' | ';
+                echo anchor('shop2', 'Select item') . ' | ';
+                echo anchor('shop2/checkout', 'Confirm') . ' | ';
                 echo anchor('shop2/destroy', 'Cancel');
 ?>
 

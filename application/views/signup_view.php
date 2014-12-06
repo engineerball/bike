@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Bike Rental Shop</title>
+  <title>Bike Shop</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -38,7 +38,7 @@
     <div class="col-md-12 column">
       <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
-           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="<?php echo base_url(); ?>">Brand</a>
+           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="<?php echo base_url(); ?>">Bike Shop</a>
         </div>
         
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -107,31 +107,31 @@
         }
 ?>
 
-			<?php echo form_open('renters/dosignup'); ?>
+			<?php echo form_open('customer/dosignup'); ?>
 			<div class="form-group">
-					 <label for="name" class="col-sm-2 control-label">Name</label>
+					 <label for="firstname" class="col-sm-2 control-label">First name</label>
 					<div class="col-sm-10">
 						 <?php 
-							echo form_error('name', '<font color=red>', '</font><br \>');
-							echo form_input('name', set_value('name')).'<br />'; ?>
+							echo form_error('firstnamename', '<font color=red>', '</font><br \>');
+							echo form_input('firstname', set_value('firstname')).'<br />'; ?>
 
 					</div>
 			</div>
 			<div class="form-group">
-					 <label for="IDCard" class="col-sm-2 control-label">ID Card/Passport</label>
+					 <label for="lastname" class="col-sm-2 control-label">Last name</label>
 					<div class="col-sm-10">
 						 <?php 
-							echo form_error('idcard', '<font color=red>', '</font><br \>');
-							echo form_input('idcard', set_value('idcard')).'<br />'; ?>
+							echo form_error('lastname', '<font color=red>', '</font><br \>');
+							echo form_input('lastname', set_value('lastname')).'<br />'; ?>
 
 					</div>
 			</div>
 			<div class="form-group">
-					 <label for="MobilePhone" class="col-sm-2 control-label">Mobile Phone</label>
+					 <label for="Phone" class="col-sm-2 control-label">Phone</label>
 					<div class="col-sm-10">
 						 <?php 
-							echo form_error('tel', '<font color=red>', '</font><br \>');
-							echo form_input('tel', set_value('tel')).'<br />'; ?>
+							echo form_error('phone', '<font color=red>', '</font><br \>');
+							echo form_input('phone', set_value('phone')).'<br />'; ?>
 
 					</div>
 			</div>
@@ -141,15 +141,6 @@
 						 <?php 
 							echo form_error('email', '<font color=red>', '</font><br \>');
 							echo form_input('email', set_value('email')).'<br />'; ?>
-
-					</div>
-			</div>
-			<div class="form-group">
-					 <label for="Username" class="col-sm-2 control-label">Username</label>
-					<div class="col-sm-10">
-						 <?php 
-							echo form_error('username', '<font color=red>', '</font><br \>');
-							echo form_input('username', set_value('username')).'<br />'; ?>
 
 					</div>
 			</div>

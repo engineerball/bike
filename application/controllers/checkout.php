@@ -28,28 +28,53 @@ class checkout extends CI_Controller {
                 $this->load->view('includes/template', $data);
 
 	}
+    
+    function addshipoaddress()
+    {
+        $data['main_content'] = 'checkout/formaddress_view';
+        $this->load->view('includes/template', $data);
+    }
 
 	function saveAddress()
 	{
-		$address = array(
-                'fullname' => $this->input->post('fullname'),
-                'firstname' => $this->input->post('firstname'),
-                'lastname' => $this->input->post('lastname'),
-                'email' => $this->input->post('email'),
-                'telephone' => $this->input->post('telephone'),
-                'address1' => $this->input->post('address1'),
-                'address2' => $this->input->post('address2'),
-                'province' => $this->input->post('province'),
-                'postcode' => $this->input->post('postcode')
+		$billaddress = array(
+                'bill_firstname' => $this->input->post('firstname'),
+                'bill_lastname' => $this->input->post('lastname'),
+                'bill_email' => $this->input->post('email'),
+                'bill_phone' => $this->input->post('phone'),
+                'bill_address1' => $this->input->post('address1'),
+                'bill_address2' => $this->input->post('address2'),
+                'bill_city' => $this->input->post('city'),
+                'bill_zip' => $this->input->post('zip'),
+            );
+                $this->session->set_userdata('billaddress', $billaddress);
+
+        if ($this->input->post('ship') != false)
+        {
+        $shipaddress = array(
+                'ship_firstname' => $this->input->post('firstname'),
+                'ship_lastname' => $this->input->post('lastname'),
+                'ship_email' => $this->input->post('email'),
+                'ship_phone' => $this->input->post('phone'),
+                'ship_address1' => $this->input->post('address1'),
+                'ship_address2' => $this->input->post('address2'),
+                'ship_city' => $this->input->post('city'),
+                'ship_zip' => $this->input->post('zip')
                 );
-                $this->session->set_userdata('address', $address);
+                $this->session->set_userdata('shipaddress', $shipaddress);
                 redirect('checkout/step2');	
+        }
+        else
+        {
+            redirect('checkout/addshipaddress');
+        }
 	}
 	
 	function step2()
 	{
 		
 		$data['main_content'] = 'checkout/showadddress_view';
+		$data['cart'] = $this->cart->contents();
                 $this->load->view('includes/template', $data);
 
 	}

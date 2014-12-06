@@ -107,13 +107,13 @@
         }
 ?>
 
-			<?php echo form_open('renters/dologin'); ?>
+			<?php echo form_open('customer/dologin'); ?>
 				<div class="form-group">
-					 <label for="username" class="col-sm-2 control-label">Username</label>
+					 <label for="email" class="col-sm-2 control-label">Email</label>
 					<div class="col-sm-10">
 						 <?php 
-							echo form_error('username', '<font color=red>', '</font><br \>');
-							echo form_input('username', set_value('username')).'<br />'; ?>
+							echo form_error('email', '<font color=red>', '</font><br \>');
+							echo form_input('email', set_value('email')).'<br />'; ?>
 
 					</div>
 				</div>

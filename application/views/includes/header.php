@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Bike Rental Shop</title>
+  <title>Bike Shop</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -38,7 +38,7 @@
     <div class="col-md-12 column">
       <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
-           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="<?php echo base_url(); ?>">Brand</a>
+           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="<?php echo base_url(); ?>">Bikeshop</a>
         </div>
         
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -60,12 +60,12 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="<?php echo base_url().'shopping/cart'; ?>">
+              <a href="<?php echo base_url().'shop2/view_cart'; ?>">
 		<?php 
 			if ( $this->cart->total_items() ) {
 				echo 'Item ('.$this->cart->total_items().')';
 			} else {
-				echo 'Item (0)';
+				echo 'Your cart is empty';
 			}
 		?>
 	      </a>
@@ -73,8 +73,8 @@
             <li class="dropdown">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 		<?php
-			if ($this->session->userdata('username')) {
-                                echo 'Howdy! '.$this->session->userdata('username');
+			if ($this->session->userdata('email')) {
+                                echo 'Howdy! '.$this->session->userdata('email');
                         } else {
 				echo 'Member';
                         }
@@ -84,11 +84,12 @@
               <ul class="dropdown-menu">
                 <li>
 		<?php
-			if ($this->session->userdata('username')) {
-				echo '<a href="'.base_url().'renters/logout">Log Out</a>';
+			if ($this->session->userdata('email')) {
+				echo '<a href="'.base_url().'customer/address">Address</a>';
+				echo '<a href="'.base_url().'customer/logout">Log Out</a>';
 			} else {
-				echo '<a href="'.base_url().'renters/login">Log In</a>';
-				echo '<a href="'.base_url().'renters/signup">Register</a>';
+				echo '<a href="'.base_url().'customer/login">Log In</a>';
+				echo '<a href="'.base_url().'customer/signup">Register</a>';
 			}
 		?>
                 </li>
