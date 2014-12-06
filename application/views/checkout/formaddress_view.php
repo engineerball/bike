@@ -26,6 +26,7 @@ if($this->session->flashdata('msg_error'))
             echo form_input('city', set_value('city')).'<br />';
             echo form_label('ZIP:', 'zip').' ';
             echo form_input('zip', set_value('zip')).'<br />';
+            echo form_hidden('ship', TRUE);
             echo form_submit('submit', 'Continue');
         }
         else

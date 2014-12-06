@@ -5,22 +5,26 @@ if($this->session->flashdata('msg_error'))
                 echo $this->session->flashdata('msg_error');
         }
 
+?>
+               <div class="row clearfix">
+                <div class="col-md-6 column">
+<?php
     echo '<strong>Billing address</strong><br />';
 	$shipaddress = $this->session->userdata('billaddress');
-	
 	foreach ( $shipaddress as $item) {
 		echo $item . '<br />';
 	}
-
-    
+?>
+                </div>
+                <div class="col-md-6 column">
+<?php
     echo '<strong>Shipping address</strong><br />';
 	$shipaddress = $this->session->userdata('shipaddress');
-	
 	foreach ( $shipaddress as $item) {
 		echo $item . '<br />';
     }
 ?>
-               <div class="row clearfix">
+                </div>
                 <div class="col-md-12 column">
                     <table class="table">
                         <thead>
@@ -38,7 +42,7 @@ if($this->session->flashdata('msg_error'))
                                     Price
                                 </th>
                                 <th>
-
+                                    Total
                                 </th>
                             </tr>
                         </thead>
@@ -59,6 +63,9 @@ if($this->session->flashdata('msg_error'))
                                 <td>
                                     <?php echo number_format($items['price'], 2); ?>
                                 </td>
+                                <td>
+                                    <?php echo number_format($items['subtotal'], 2); ?>
+                                </td>
                             </tr>
 <?php
     endforeach;
@@ -66,15 +73,16 @@ if($this->session->flashdata('msg_error'))
                             <tr class="success">
                                 <td></td>
                                 <td></td>
-                                <td><strong>Total</strong></td>
+                                <td></td>
+                                <td><strong>Grand total</strong></td>
                                 <td>
                                     <strong><?php echo number_format($this->cart->total(), 2); ?></strong>
                                 </td>
                             </tr>
                         </tbody>
-                    </table> <button type="button" class="btn btn-default">Confim</button>
+                        </table> <!--<button type="button" class="btn btn-default">Confim</button> -->
 <?php 
-	echo anchor('checkout/step3', 'Submit Order');	
+	echo anchor('checkout/submitorder', 'Submit Order');	
 ?>
                 </div>
             </div>

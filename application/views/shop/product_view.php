@@ -1,5 +1,7 @@
 			<div class="row clearfix">
-				<div class="col-md-2 column">
+				<div class="col-md-3 column">
+                </div>
+				<div class="col-md-6 column">
                 <img alt="140x140" src="<?php echo base_url().'assets/uploads/files/products/'.$product->images; ?>" class="img-rounded" />
 					<dl>
 						<dt>
@@ -30,9 +32,7 @@
     echo form_close();
 ?> 
 				</div>
-				<div class="col-md-4 column">
-				</div>
-				<div class="col-md-4 column">
+				<div class="col-md-3 column">
 				</div>
 			</div>
 		</div>

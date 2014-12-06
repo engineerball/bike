@@ -110,4 +110,22 @@ Class order_model extends CI_Model
         return $order_number;
     }
 
+    function saveorder($data)
+    {
+        $this->db->insert('orders', $data);
+        $cause = array('order_number'=>$data['order_number']);
+        $order_id = $this->db->select('id')->from('orders')->where($cause)->get()->row();
+        return $order_id->id;
+    }
+
+    function saveorderitems($product_id, $order_id, $quantity, $subtotal)
+    {
+        $data = array(
+            'product_id' => $product_id,
+            'order_id' => $order_id,
+            'quantity' => $quantity,
+            'subtotal' => $subtotal
+        );    
+        $this->db->insert('order_items', $data);
+    }
 }

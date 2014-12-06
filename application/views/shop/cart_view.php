@@ -64,7 +64,17 @@
 								</td>
 							</tr>
 						</tbody>
-					</table> <button type="button" class="btn btn-default">Confim</button>
+					</table> <!--<button type="button" class="btn btn-default">Confim</button>-->
+<?php 
+                if ( !$this->cart->total_items())
+        {
+                echo heading('Empty item', '1');
+                echo anchor('shop2', 'Select item');
+        } else {
+                echo anchor('shop2', 'Select item') . ' | ';
+                echo anchor('shop2/checkout', 'Confirm') . ' | ';
+                echo anchor('shop2/destroy', 'Cancel');
+        }?>
 				</div>
 			</div>
 		</div>

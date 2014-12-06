@@ -178,7 +178,7 @@ class Shop2 extends CI_Controller {
 #		{
 			if ($this->cart->total_items())
 			{
-				$cart_id = $this->session->userdata('session_id');
+				$cart_id = substr(number_format(time() * mt_rand(),0,'',''),0,9);
 				$now = date("Y-m-d H:i:s");
 				$items = $this->cart->contents();
 #				foreach ($items as $item)
