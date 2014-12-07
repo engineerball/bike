@@ -59,5 +59,13 @@ $route['admin/category/update/(:any)'] = 'admin_category/update/$1';
 $route['admin/category/delete/(:any)'] = 'admin_category/delete/$1';
 $route['admin/category/(:any)'] = 'admin_category/index/$1';
 
+$route['admin/order'] = 'admin_order/index';
+$route['admin/order/display_order_detail'] = 'admin_order/display_order_detail';
+$route['admin/order/display_order_detail/(:any)'] = 'admin_order/display_order_detail/$1';
+#$route['admin/order/add'] = 'admin_order/index';
+#$route['admin/order/update'] = 'admin_order/update';
+#$route['admin/order/update/(:any)'] = 'admin_order/update/$1';
+#$route['admin/order/delete/(:any)'] = 'admin_order/delete/$1';
+#$route['admin/order/(:any)'] = 'admin_order/index/$1';
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
