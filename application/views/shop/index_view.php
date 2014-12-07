@@ -10,7 +10,7 @@
 				</p>
 			</div>
 			<h3>
-				h3. Lorem ipsum dolor sit amet.
+			    Our products.	
 			</h3>
 			<div class="row clearfix">
 				<div class="col-md-12 column">
