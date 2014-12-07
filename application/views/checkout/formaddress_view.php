@@ -6,7 +6,7 @@ if($this->session->flashdata('msg_error'))
         }
     if (!$this->session->userdata('email') && !$this->session->userdata('logged'))
     {
-        if (!$this->session->userdata('shipaddress'))
+        if ($this->session->userdata('shipaddress') || $this->session->userdata('billaddress'))
         {
             echo "<h3>Add address for shipping</h3>";
             echo form_open('checkout/saveAddress');
@@ -26,7 +26,7 @@ if($this->session->flashdata('msg_error'))
             echo form_input('city', set_value('city')).'<br />';
             echo form_label('ZIP:', 'zip').' ';
             echo form_input('zip', set_value('zip')).'<br />';
-            echo form_hidden('ship', TRUE);
+            echo form_hidden('ship', 'yes');
             echo form_submit('submit', 'Continue');
         }
         else
@@ -50,7 +50,7 @@ if($this->session->flashdata('msg_error'))
             echo form_label('ZIP:', 'zip').' ';
             echo form_input('zip', set_value('zip')).'<br />';
             echo form_label('Ship to this address:', 'ship').' ';
-            echo form_checkbox('ship', 'y', TRUE).'<br />';
+            echo "     <input type='checkbox' name='ship' value='yes'><br />";
             echo form_submit('submit', 'Continue');
         }
 

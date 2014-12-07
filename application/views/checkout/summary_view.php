@@ -109,3 +109,4 @@ if($this->session->flashdata('msg_error'))
         </div>
     </div>
 </div>
+<?php $this->session->unset_userdata('billaddress','shipaddress', 'order'); ?>

@@ -65,7 +65,7 @@ class checkout extends CI_Controller {
             );
                 $this->session->set_userdata('billaddress', $billaddress);
 
-        if ($this->input->post('ship') != false || $this->session->userdata('shipaddress'))
+        if ($this->input->post('ship') == 'yes')
         {
         $shipaddress = array(
                 'ship_firstname' => $this->input->post('firstname'),
