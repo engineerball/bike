@@ -27,7 +27,7 @@ CREATE TABLE `categories` (
   `name` varchar(64) NOT NULL,
   `description` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,26 +49,6 @@ CREATE TABLE `ci_sessions` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `customer_address_bank`
---
-
-DROP TABLE IF EXISTS `customer_address_bank`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `customer_address_bank` (
-  `id` int(9) unsigned NOT NULL AUTO_INCREMENT,
-  `customer_id` int(9) unsigned NOT NULL,
-  `address1` varchar(255) NOT NULL,
-  `address2` varchar(255) NOT NULL,
-  `city` varchar(255) NOT NULL,
-  `zip` varchar(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_customer_address_bank_customers1_idx` (`customer_id`),
-  CONSTRAINT `fk_customer_address_bank_customers1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `customers`
 --
 
@@ -86,7 +66,39 @@ CREATE TABLE `customers` (
   `ship_to_bill_address` enum('false','true') NOT NULL DEFAULT 'true',
   `password` varchar(40) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `customers_address_bank`
+--
+
+DROP TABLE IF EXISTS `customers_address_bank`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `customers_address_bank` (
+  `id` int(9) unsigned NOT NULL AUTO_INCREMENT,
+  `customer_id` int(9) unsigned NOT NULL,
+  `ship_firstname` varchar(255) DEFAULT NULL,
+  `ship_lastname` varchar(255) DEFAULT NULL,
+  `ship_email` varchar(255) DEFAULT NULL,
+  `ship_phone` varchar(40) DEFAULT NULL,
+  `ship_address1` varchar(255) DEFAULT NULL,
+  `ship_address2` varchar(255) DEFAULT NULL,
+  `ship_city` varchar(255) DEFAULT NULL,
+  `ship_zip` varchar(11) DEFAULT NULL,
+  `bill_firstname` varchar(255) DEFAULT NULL,
+  `bill_lastname` varchar(255) DEFAULT NULL,
+  `bill_email` varchar(255) DEFAULT NULL,
+  `bill_phone` varchar(40) DEFAULT NULL,
+  `bill_address1` varchar(255) DEFAULT NULL,
+  `bill_address2` varchar(255) DEFAULT NULL,
+  `bill_city` varchar(255) DEFAULT NULL,
+  `bill_zip` varchar(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_customer_address_bank_customers1_idx` (`customer_id`),
+  CONSTRAINT `fk_customer_address_bank_customers1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,13 +114,12 @@ CREATE TABLE `order_items` (
   `order_id` int(10) unsigned NOT NULL,
   `quantity` int(11) NOT NULL,
   `subtotal` float(10,2) NOT NULL,
-  `contents` longtext,
   PRIMARY KEY (`id`),
   KEY `fk_order_items_products1_idx` (`product_id`),
   KEY `fk_order_items_orders1_idx` (`order_id`),
   CONSTRAINT `fk_order_items_orders1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_order_items_products1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,9 +136,6 @@ CREATE TABLE `orders` (
   `ordered_on` datetime NOT NULL,
   `shipped_on` datetime NOT NULL,
   `total` float(10,2) NOT NULL,
-  `shipping` float(10,2) NOT NULL,
-  `shipping_method` tinytext NOT NULL,
-  `shipping_notes` text NOT NULL,
   `notes` text,
   `firstname` varchar(255) DEFAULT NULL,
   `lastname` varchar(255) DEFAULT NULL,
@@ -152,7 +160,7 @@ CREATE TABLE `orders` (
   PRIMARY KEY (`id`),
   KEY `fk_orders_customers1_idx` (`customer_id`),
   CONSTRAINT `fk_orders_customers1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -169,12 +177,12 @@ CREATE TABLE `products` (
   `description` text NOT NULL,
   `price` float(10,2) NOT NULL DEFAULT '0.00',
   `quantity` int(11) NOT NULL,
-  `images` text CHARACTER SET utf8,
+  `images` text CHARACTER SET latin1,
   `enabled` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`,`category_id`),
   KEY `fk_products_categories1_idx` (`category_id`),
   CONSTRAINT `fk_products_categories1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -186,4 +194,4 @@ CREATE TABLE `products` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-06 20:32:21
+-- Dump completed on 2014-12-07 16:58:32
