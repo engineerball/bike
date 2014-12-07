@@ -3,7 +3,7 @@ class checkout extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Order_model','order');
+		$this->load->model(array('Order_model','Customer_model'));
 		$this->load->library(array('cart', 'session', 'form_validation'));
 		$this->load->helper(array('url', 'html', 'form'));
         $this->load->database();
@@ -24,8 +24,13 @@ class checkout extends CI_Controller {
 	}
 
 	function step1()
-	{
-        if (!$this->session->userdata('billaddress') || !$this->session->userdata('shipaddress'))
+    {
+
+        if ( $this->session->userdata('logged'))
+        {
+            redirect('checkout/step2');
+        }
+        else if ( !$this->session->userdata('billaddress') || !$this->session->userdata('shipaddress'))
         {
                 $data['main_content'] = 'checkout/formaddress_view';
                 $this->load->view('includes/template', $data);
@@ -86,6 +91,12 @@ class checkout extends CI_Controller {
 		
 		$data['main_content'] = 'checkout/showadddress_view';
 		$data['cart'] = $this->cart->contents();
+        if ($this->session->userdata('logged'))
+        {
+            $customerid = $this->Customer_model->get_customer_id($this->session->userdata('email'));
+            $data['billaddress'] = $this->Customer_model->get_billaddress($customerid);
+            $data['shipaddress'] = $this->Customer_model->get_shipaddress($customerid);
+        }   
         $this->load->view('includes/template', $data);
 
 	}
@@ -103,8 +114,10 @@ class checkout extends CI_Controller {
 
     function submitorder()
     {
-        if ($this->cart->total_items() && $this->session->userdata('billaddress') && $this->session->userdata('shipaddress'))
+        if ($this->cart->total_items() && $this->session->userdata('billaddress') && $this->session->userdata('shipaddress') || $this->session->userdata('logged'))
         {
+            if ( !$this->session->userdata('logged'))
+            {
             $order = array();
             $order['order_number'] = substr(number_format(time() * mt_rand(), 0, '',''),0,9); 
             $order['ordered_on'] = date("Y-m-d H:i:s");
@@ -131,15 +144,37 @@ class checkout extends CI_Controller {
             $order['ship_address1'] = $this->session->userdata['shipaddress']['ship_address1'];
             $order['ship_address2'] = $this->session->userdata['shipaddress']['ship_address2'];
 
+            }
+            else 
+            {
+                $customerid = $this->Customer_model->get_customer_id($this->session->userdata('email'));
+                $customerdetail = $this->Customer_model->get_customer($customerid);
+                $billaddress = $this->Customer_model->get_billaddress($customerid);
+                $shipaddress = $this->Customer_model->get_shipaddress($customerid);
+                $order = array(
+                    'order_number' => substr(number_format(time() * mt_rand(), 0, '',''),0,9),
+                    'ordered_on' => date("Y-m-d H:i:s"),
+                    'customer_id' => $customerid,
+                    'firstname' => $customerdetail->firstname,
+                    'lastname' => $customerdetail->lastname,
+                    'email' => $customerdetail->email,
+                    'phone' => $customerdetail->phone
+                );
+
+                foreach($billaddress[0] as $item => $value){
+                    $order[$item] = $value;
+                }
+                foreach($shipaddress[0] as $item => $value){
+                    $order[$item] = $value;
+                }
+            }
             $order['total'] = $this->cart->total();
-
-
-            $order['order_id'] = $this->order->saveorder($order);
-
+            $order['order_id'] = $this->Order_model->saveorder($order);
+           
             $items = $this->cart->contents();
             foreach ($items as $item)
             {
-                $this->order->saveorderitems($item['id'], $order['order_id'], $item['qty'], $item['subtotal']);
+                $this->Order_model->saveorderitems($item['id'], $order['order_id'], $item['qty'], $item['subtotal']);
 
             }
             $this->session->set_userdata('order', $order);
@@ -153,6 +188,12 @@ class checkout extends CI_Controller {
 
             $data['cart'] = $this->cart->contents();
             $data['order'] = $this->session->userdata('order');
+            if($this->session->userdata('logged'))
+            {
+                $customerid = $this->Customer_model->get_customer_id($this->session->userdata('email'));
+                $data['billaddress'] = $this->Customer_model->get_billaddress($customerid);
+                $data['shipaddress'] = $this->Customer_model->get_shipaddress($customerid);
+            }
             $this->cart->destroy();
             $data['main_content'] = 'checkout/summary_view';
             $this->load->view('includes/template', $data);

@@ -12,22 +12,41 @@ if($this->session->flashdata('msg_error'))
             <h3>Your order number is : <?php echo $this->session->userdata['order']['order_number']; ?></h3>
 <div class="col-md-6">
 <?php
+    if ( !$this->session->userdata('logged'))
+    {
     echo '<strong>Billing address</strong><br />';
-	$shipaddress = $this->session->userdata('billaddress');
-	foreach ( $shipaddress as $item) {
-		echo $item . '<br />';
-	}
-?>
-</div>
-<div class="col-md-6">
-<?php
-    echo '<strong>Shipping address</strong><br />';
-	$shipaddress = $this->session->userdata('shipaddress');
-	
-	foreach ( $shipaddress as $item) {
-		echo $item . '<br />';
+    $shipaddress = $this->session->userdata('billaddress');
+    foreach ( $shipaddress as $item) {
+        echo $item . '<br />';
     }
 ?>
+                </div>
+                <div class="col-md-6 column">
+<?php
+    echo '<strong>Shipping address</strong><br />';
+    $shipaddress = $this->session->userdata('shipaddress');
+    foreach ( $shipaddress as $item) {
+        echo $item . '<br />';
+    }
+    }
+    else
+    {
+    echo '<strong>Billing address</strong><br />';
+    foreach ( $billaddress[0] as $item) {
+         echo $item . '<br />';
+   }
+?>
+                </div>
+                <div class="col-md-6 column">
+<?php
+    echo '<strong>Shipping address</strong><br />';
+    foreach ( $shipaddress['0'] as $item) {
+        echo $item . '<br />';
+    }
+
+    }
+?>
+
 </div>
                 <div class="col-md-12 column">
                     <table class="table">

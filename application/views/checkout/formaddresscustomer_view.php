@@ -68,7 +68,6 @@ if($this->session->flashdata('msg_error'))
         echo form_input('zip', set_value('zip')).'<br />';
         echo form_label('Ship to this address:', 'ship').' ';
         echo form_checkbox('ship', 'y', TRUE).'<br />';
-        echo form_hidden('billaddress', TRUE);
         echo form_submit('submit', 'Continue');
     }
 ?>

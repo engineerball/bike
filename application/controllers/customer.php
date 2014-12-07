@@ -33,8 +33,8 @@ class Customer extends CI_Controller {
 		$this->form_validation->set_rules('clear_pass', 'Password', 'required');
  		$this->form_validation->set_error_delimiters('<font color=red>','</font>');
 
-//		if ($this->input->post('submit'))
-//		{
+		if (!$this->Customer->check_email($this->input->post('email')))
+		{
                 $firstname = $this->input->post('firstname');
                 $lastname = $this->input->post('lastname');
                 $phone = $this->input->post('phone');
@@ -47,20 +47,19 @@ class Customer extends CI_Controller {
                                 'phone' => $phone,
                                 'email' => $email,
                                 'password' => md5($clear_pass));
-		print_r($customer_data);
 
-		if (!$this->form_validation->run() == FALSE )
-		{
-			$this->load->view('signup_view');
-        } 
-        else 
-        {
-	        $this->Customer->add_customer($customer_data);
-            redirect('customer/login');
+		    if (!$this->form_validation->run() == FALSE )
+		    {
+			    $this->load->view('signup_view');
+            }    
+            else 
+            {
+	            $this->Customer->add_customer($customer_data);
+                redirect('customer/login');
+		    }
+		} else {
+            redirect('customer/signup');
 		}
-//		} else {
-//			echo "Not Post";
-//		}
 	}
 	
 	function login()
@@ -103,11 +102,61 @@ class Customer extends CI_Controller {
 
     function add_address()
     {
-        $data['cart'] = $this->cart->contents();
-        $this->session->set_flashdata('redirectToCurrent', current_url());
+        #$this->session->set_flashdata('redirectToCurrent', current_url());
         $data['main_content'] = 'checkout/formaddress_view';
         $this->load->view('includes/template', $data);
     }
+
+    function add_shipaddress()
+    {
+        #$this->session->set_flashdata('redirectToCurrent', current_url());
+        $data['main_content'] = 'checkout/formaddresscustomer_view';
+        $this->load->view('includes/template', $data);
+    }
+
+    function save_billaddress()
+    {
+        $customerID = $this->Customer->get_customer_id($this->session->userdata('email'));
+        $member = $this->Customer->get_customer($customerID);
+        if($this->input->post('billaddress'))
+        {
+            $billaddress = array(
+                'customer_id' => $customerID,
+                'bill_firstname' => $member->firstname,
+                'bill_lastname' => $member->lastname,
+                'bill_email' => $member->email,
+                'bill_phone' => $member->phone,
+                'bill_address1' => $this->input->post('address1'),
+                'bill_address2' => $this->input->post('address2'),
+                'bill_city' => $this->input->post('city'),
+                'bill_zip' => $this->input->post('zip'),
+            );
+
+            $result =  $this->Customer->save_address($customerID, $billaddress);
+        }
+
+        if($this->input->post('ship'))
+            {
+                echo "aaaa";
+                $shipaddress = array(
+                    'customer_id' => $customerID,
+                    'ship_firstname' => $member->firstname,
+                    'ship_lastname' => $member->lastname,
+                    'ship_email' => $member->email,
+                    'ship_phone' => $member->phone,
+                    'ship_address1' => $this->input->post('address1'),
+                    'ship_address2' => $this->input->post('address2'),
+                    'ship_city' => $this->input->post('city'),
+                    'ship_zip' => $this->input->post('zip'),
+                );
+
+        $result =  $this->Customer->save_address($customerID, $shipaddress);
+ 
+                redirect('/');
+            }
+
+    }
+
 	function logout()
 	{
 		$this->session->sess_destroy();

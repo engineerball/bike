@@ -9,6 +9,8 @@ if($this->session->flashdata('msg_error'))
                <div class="row clearfix">
                 <div class="col-md-6 column">
 <?php
+    if ( !$this->session->userdata('logged'))
+    {
     echo '<strong>Billing address</strong><br />';
 	$shipaddress = $this->session->userdata('billaddress');
 	foreach ( $shipaddress as $item) {
@@ -22,6 +24,23 @@ if($this->session->flashdata('msg_error'))
 	$shipaddress = $this->session->userdata('shipaddress');
 	foreach ( $shipaddress as $item) {
 		echo $item . '<br />';
+    }
+    }
+    else 
+    {
+    echo '<strong>Billing address</strong><br />';
+    foreach ( $billaddress[0] as $item) {
+         echo $item . '<br />';
+   }
+?>
+                </div>
+                <div class="col-md-6 column">
+<?php
+    echo '<strong>Shipping address</strong><br />';
+    foreach ( $shipaddress['0'] as $item) {
+        echo $item . '<br />';
+    }
+
     }
 ?>
                 </div>

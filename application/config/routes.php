@@ -44,11 +44,6 @@ $route['404_override'] = '';
 $route['checkout'] = 'checkout';
 
 $route['admin'] = 'admin_product/index';
-$route['admin/add'] = 'admin_product/add';
-$route['admin/update'] = 'admin_product/update';
-$route['admin/update/(:any)'] = 'admin_product/update/$1';
-$route['admin/delete/(:any)'] = 'admin_product/delete/$1';
-$route['admin/(:any)'] = 'admin_product/index/$1';
 
 $route['admin/product'] = 'admin_product/index';
 $route['admin/product/add'] = 'admin_product/add';

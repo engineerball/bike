@@ -35,6 +35,25 @@ Class Customer_model extends CI_Model
         return $result->row();
     }
 
+    function get_customer_id($email)
+    {
+        $result = $this->db->select('id')->get_where('customers', array('email'=>$email));
+        return $result->row()->id;
+    }
+
+    function check_email($email)
+    {
+        $result = $this->db->get_where('customers', array('email'=>$email));
+        if ($result->num_rows() > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     function get_address_list($id)
     {
         $addresses = $this->db->where('customer_id', $id)->get('customers_address_bank')->result_array();
@@ -62,16 +81,37 @@ Class Customer_model extends CI_Model
         return $address;
     }
 
-   function save_address($data)
+    function get_billaddress($id)
+    {
+        $billaddress = $this->db->select('bill_firstname, bill_lastname, bill_email, bill_phone, bill_address1, bill_address2, bill_city, bill_zip')->where('customer_id', $id)->get('customers_address_bank')->result_array();
+        if($billaddress)
+        {
+            return $billaddress;
+        }
+        
+    }
+
+    function get_shipaddress($id)
+    {
+        $shipaddress = $this->db->select('ship_firstname, ship_lastname, ship_email, ship_phone, ship_address1, ship_address2, ship_city, ship_zip')->where('customer_id', $id)->get('customers_address_bank')->result_array();
+        if($shipaddress)
+        {
+            return $shipaddress;
+        }
+        
+    }
+
+   function save_address($customer_id, $data)
     {
         // prepare fields for db insertion
-        $data['field_data'] = serialize($data['field_data']);
+        //$data['field_data'] = serialize($data['field_data']);
         // update or insert
-        if(!empty($data['id']))
+            var_dump($data);
+        if(!empty($customer_id))
         {
-            $this->db->where('id', $data['id']);
+            $this->db->where('id', $customer_id);
             $this->db->update('customers_address_bank', $data);
-            return $data['id'];
+            return $customer_id;
         } else {
             $this->db->insert('customers_address_bank', $data);
             return $this->db->insert_id();
