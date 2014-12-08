@@ -118,8 +118,12 @@ class Customer extends CI_Controller {
     {
         $customerID = $this->Customer->get_customer_id($this->session->userdata('email'));
         $member = $this->Customer->get_customer($customerID);
-        if($this->input->post('billaddress'))
+		$address_id = $this->Customer->get_address_list_id($customerID);
+		echo "Address id ===>".$address_id."<br />";
+		
+        if($this->input->post('billaddress') == 'yes')
         {
+		echo "add bill<br />";
             $billaddress = array(
                 'customer_id' => $customerID,
                 'bill_firstname' => $member->firstname,
@@ -132,12 +136,11 @@ class Customer extends CI_Controller {
                 'bill_zip' => $this->input->post('zip'),
             );
 
-            $result =  $this->Customer->save_address($customerID, $billaddress);
+            $result =  $this->Customer->save_address($customerID, $billaddress, $address_id);
         }
-
-        if($this->input->post('ship'))
+        if($this->input->post('ship') == 'yes')
             {
-                echo "aaaa";
+			echo "add ship<br />";
                 $shipaddress = array(
                     'customer_id' => $customerID,
                     'ship_firstname' => $member->firstname,
@@ -149,8 +152,10 @@ class Customer extends CI_Controller {
                     'ship_city' => $this->input->post('city'),
                     'ship_zip' => $this->input->post('zip'),
                 );
+			$address_id = $this->Customer->get_address_list_id($customerID);
+			echo "Address id ===>".$address_id."<br />";
 
-        $result =  $this->Customer->save_address($customerID, $shipaddress);
+        $result =  $this->Customer->save_address($customerID, $shipaddress, $address_id);
  
                 redirect('/');
             }

@@ -53,7 +53,17 @@ Class Customer_model extends CI_Model
             return false;
         }
     }
-
+	
+	function get_address_list_id($id)
+	{
+		$query = $this->db->get_where('customers_address_bank', array('customer_id'=>$id));
+		if ($query->num_rows() > 0)
+		{
+			$result = $query->row()->customer_id;
+			echo "This is from address list id ".$result."<br />";
+			return $result;
+		}
+	}
     function get_address_list($id)
     {
         $addresses = $this->db->where('customer_id', $id)->get('customers_address_bank')->result_array();
@@ -84,7 +94,7 @@ Class Customer_model extends CI_Model
     function get_billaddress($id)
     {
         $billaddress = $this->db->select('bill_firstname, bill_lastname, bill_email, bill_phone, bill_address1, bill_address2, bill_city, bill_zip')->where('customer_id', $id)->get('customers_address_bank')->result_array();
-        if($billaddress)
+        if(!empty($billaddress))
         {
             return $billaddress;
         }
@@ -94,25 +104,31 @@ Class Customer_model extends CI_Model
     function get_shipaddress($id)
     {
         $shipaddress = $this->db->select('ship_firstname, ship_lastname, ship_email, ship_phone, ship_address1, ship_address2, ship_city, ship_zip')->where('customer_id', $id)->get('customers_address_bank')->result_array();
-        if($shipaddress)
+        if(!empty($shipaddress))
         {
             return $shipaddress;
         }
         
     }
 
-   function save_address($customer_id, $data)
+   function save_address($customer_id, $data, $address_id)
     {
         // prepare fields for db insertion
         //$data['field_data'] = serialize($data['field_data']);
         // update or insert
-            var_dump($data);
-        if(!empty($customer_id))
+        //  
+        if($address_id)
         {
-            $this->db->where('id', $customer_id);
-            $this->db->update('customers_address_bank', $data);
+			echo "Update db if $address_id is not empty with <br />";
+						var_dump($data);
+						echo "<br />";
+			$result = $this->db->where('customer_id', $customer_id)
+								->update('customers_address_bank', $data);		
             return $customer_id;
         } else {
+			echo "insert db if $address_id is empty with<br />";
+			var_dump($data);
+						echo "<br />";
             $this->db->insert('customers_address_bank', $data);
             return $this->db->insert_id();
         }

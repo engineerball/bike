@@ -28,16 +28,30 @@ class checkout extends CI_Controller {
 
         if ( $this->session->userdata('logged'))
         {
-            redirect('checkout/step2');
+			$customerid = $this->Customer_model->get_customer_id($this->session->userdata('email'));
+            $billaddress = $this->Customer_model->get_billaddress($customerid);
+            $shipaddress = $this->Customer_model->get_shipaddress($customerid);
+            if (!empty($billaddress) && !empty($shipaddress))
+			{	
+				redirect('checkout/step2');
+			}
+			else
+			{
+				$data['main_content'] = 'checkout/formaddress_view';
+                $this->load->view('includes/template', $data);
+			}
         }
-        else if ( !$this->session->userdata('billaddress') || !$this->session->userdata('shipaddress'))
+        else 
         {
+			if ( !$this->session->userdata('billaddress') || !$this->session->userdata('shipaddress'))
+			{
                 $data['main_content'] = 'checkout/formaddress_view';
                 $this->load->view('includes/template', $data);
-        }
-        else
-        {
-            redirect('checkout/step2');
+			}
+			else
+			{
+				redirect('checkout/step2');
+			}
         }
 	}
     
