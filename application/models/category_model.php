@@ -3,7 +3,7 @@ Class Category_model extends CI_Model
 {
     function get_categories()
     {
-        $this->db->select('id');
+        $this->db->select('id')->where('enable','1');
         $this->db->order_by('name', 'ASC');
         $result = $this->db->get('categories');
 

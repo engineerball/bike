@@ -22,7 +22,10 @@
     echo form_hidden("id", $product->id);
     echo form_hidden("name", $product->name);
     echo form_hidden("price", $product->price);
-    echo "<b>Total</b>:".form_dropdown('quantity',array('1'=>'1','2'=>'2', '3'=>'3', '4'=>'4', '5'=>'5'),1);
+    $array = array();
+    for ($i = 1; $i <= $product->quantity; $i++)
+        $array[$i] = $i;
+    echo "<b>Total</b>:".form_dropdown('quantity',$array,1);
 ?>
  
                         </dd>
@@ -36,5 +39,3 @@
 				</div>
 			</div>
 		</div>
-	</div>
-</div>

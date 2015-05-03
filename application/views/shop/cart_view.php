@@ -1,12 +1,12 @@
 <?php
         if ( !$this->cart->total_items())
         {
-                echo heading('Empty item', '1');
-                echo anchor('shop2', 'Select item');
+            echo heading('Your cart is empty', '1');
+ ?>
+            <a class="btn btn-default" href="/shop2">Select item</a>
+        <?php
         } else {
-                echo anchor('shop2', 'Select item') . ' | ';
-                echo anchor('shop2/checkout', 'Confirm') . ' | ';
-                echo anchor('shop2/destroy', 'Cancel');
+        	echo heading('Your item(s) in cart', '1');
 ?>
 
 			<div class="row clearfix">
@@ -49,7 +49,7 @@
 									<?php echo number_format($items['price'], 2); ?>
 								</td>
 								<td>
-									<?php echo anchor('shop2/remove/'.$items['rowid'], 'Remove'); ?>
+									<?php echo anchor('shop2/remove/'.$items['rowid'], 'x Remove item from cart'); ?>
 								</td>
 							</tr>
 <?php
@@ -64,22 +64,22 @@
 								</td>
 							</tr>
 						</tbody>
-					</table> <!--<button type="button" class="btn btn-default">Confim</button>-->
+					</table>
 <?php 
                 if ( !$this->cart->total_items())
         {
                 echo heading('Empty item', '1');
-                echo anchor('shop2', 'Select item');
-        } else {
-                echo anchor('shop2', 'Select item') . ' | ';
-                echo anchor('shop2/checkout', 'Confirm') . ' | ';
-                echo anchor('shop2/destroy', 'Cancel');
-        }?>
+        ?>
+                <a class="btn btn-default" href="/shop2">Select item</a>
+        <?php 	} else { ?>
+        	<a class="btn btn-default" href="/shop2">Select item</a>
+        	<a class="btn btn-success" href="/shop2/checkout">Confirm</a>
+        	<a class="btn btn-danger" href="/shop2/destroy">Cancel</a>
+        	
+        <?php }?>
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
 
 <?php
 }

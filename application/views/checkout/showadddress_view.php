@@ -6,44 +6,54 @@ if($this->session->flashdata('msg_error'))
         }
 
 ?>
-               <div class="row clearfix">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
                 <div class="col-md-6 column">
-<?php
-    if ( !$this->session->userdata('logged'))
-    {
-    echo '<strong>Billing address</strong><br />';
-	$shipaddress = $this->session->userdata('billaddress');
-	foreach ( $shipaddress as $item) {
-		echo $item . '<br />';
-	}
-?>
+                    <?php
+                        if ( !$this->session->userdata('logged'))
+                        {
+                            echo '<h2>Billing address</h2><br />';
+                        	$billaddress = $this->session->userdata('billaddress');
+                            echo '<p class="text-left">' . $billaddress['firstname'] . ' ' . $billaddress['lastname'] . '</p>';
+                            echo '<p class="text-left">' . $billaddress['email'] . '</p>';
+                            echo '<p class="text-left">' . $billaddress['bill_address1'] . '</p>';
+                            echo '<p class="text-left">' . $billaddress['bill_address2'] . '</p>';
+                            echo '<p class="text-left">' . $billaddress['bill_city'] . '</p>';
+                            echo '<p class="text-left">' . $billaddress['bill_zip'] . '</p>';
+                    ?>
                 </div>
                 <div class="col-md-6 column">
-<?php
-    echo '<strong>Shipping address</strong><br />';
-	$shipaddress = $this->session->userdata('shipaddress');
-	foreach ( $shipaddress as $item) {
-		echo $item . '<br />';
-    }
-    }
-    else 
-    {
-    echo '<strong>Billing address</strong><br />';
-    foreach ( $billaddress[0] as $item) {
-         echo $item . '<br />';
-   }
-?>
+                    <?php
+                            echo '<h2>Shipping address</h2><br />';
+                        	$shipaddress = $this->session->userdata('shipaddress');
+                            echo '<p class="text-left">' . $shipaddress['ship_firstname'] . ' ' . $shipaddress['ship_lastname'] . '</p>';
+                            echo '<p class="text-left">' . $shipaddress['ship_email'] . '</p>';
+                            echo '<p class="text-left">' . $shipaddress['ship_address1'] . '</p>';
+                            echo '<p class="text-left">' . $shipaddress['ship_address2'] . '</p>';
+                            echo '<p class="text-left">' . $shipaddress['ship_city'] . '</p>';
+                            echo '<p class="text-left">' . $shipaddress['ship_zip'] . '</p>';
+                        }
+                        else 
+                        {
+                            echo '<g2>Billing address</h2><br />';
+                            foreach ( $billaddress[0] as $item) {
+                                 echo $item . '<br />';
+                       }
+                    ?>
                 </div>
                 <div class="col-md-6 column">
-<?php
-    echo '<strong>Shipping address</strong><br />';
-    foreach ( $shipaddress['0'] as $item) {
-        echo $item . '<br />';
-    }
+                    <?php
+                            echo '<h2>Shipping address</h2><br />';
+                            foreach ( $shipaddress['0'] as $item) {
+                                echo $item . '<br />';
+                            }
 
-    }
-?>
+                        }
+                    ?>
                 </div>
+            </div>
+        </div>
+        <div class="row clearfix">    
                 <div class="col-md-12 column">
                     <table class="table">
                         <thead>
@@ -71,7 +81,7 @@ if($this->session->flashdata('msg_error'))
                         <tbody>
                             <tr>
                                 <td>
-<?php echo $items['id']; ?> 
+                                    <?php echo $items['id']; ?> 
                                 </td>
                                 <td>
                                     <?php echo $items['name']; ?>
@@ -86,9 +96,9 @@ if($this->session->flashdata('msg_error'))
                                     <?php echo number_format($items['subtotal'], 2); ?>
                                 </td>
                             </tr>
-<?php
-    endforeach;
-?>
+        <?php
+            endforeach;
+        ?>
                             <tr class="success">
                                 <td></td>
                                 <td></td>
@@ -101,8 +111,10 @@ if($this->session->flashdata('msg_error'))
                         </tbody>
                         </table> <!--<button type="button" class="btn btn-default">Confim</button> -->
 <?php 
-	echo anchor('checkout/submitorder', 'Submit Order');	
+	//echo anchor('checkout/submitorder', 'Submit Order');	
 ?>
+                        <a class="btn btn-primary" href="/checkout/submitorder">Confirm</a>
+                        <a class="btn btn-danger" href="/shop2/destroy">Cancel</a>
                 </div>
             </div>
         </div>

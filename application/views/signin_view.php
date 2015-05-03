@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Bike Rental Shop</title>
+  <title>Bike Shop</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -38,25 +38,11 @@
     <div class="col-md-12 column">
       <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
-           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="<?php echo base_url(); ?>">Brand</a>
+           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="<?php echo base_url(); ?>">Bikeshop</a>
         </div>
         
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="dropdown">
-               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bicycle Type<strong class="caret"></strong></a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a href="#">Type A</a>
-                </li>
-                <li>
-                  <a href="#">Type B</a>
-                </li>
-                <li>
-                  <a href="#">Type C</a>
-                </li>               
-              </ul>
-            </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li>
@@ -78,7 +64,6 @@
 			if ($this->session->userdata('username')) {
 				echo '<a href="'.base_url().'renters/logout">Log Out</a>';
 			} else {
-				echo '<a href="'.base_url().'renters/login">Log In</a>';
 				echo '<a href="'.base_url().'renters/signup">Register</a>';
 			}
 		?>
@@ -89,17 +74,6 @@
         </div>
         
       </nav>
-      <ul class="breadcrumb">
-        <li>
-          <a href="#">Home</a> <span class="divider">/</span>
-        </li>
-        <li>
-          <a href="#">Library</a> <span class="divider">/</span>
-        </li>
-        <li class="active">
-          Data
-        </li>
-      </ul>
 <?php
         if($this->session->flashdata('msg_error'))
         {
@@ -107,34 +81,39 @@
         }
 ?>
 
-			<?php echo form_open('customer/dologin'); ?>
-				<div class="form-group">
-					 <label for="email" class="col-sm-2 control-label">Email</label>
-					<div class="col-sm-10">
-						 <?php 
-							echo form_error('email', '<font color=red>', '</font><br \>');
-							echo form_input('email', set_value('email')).'<br />'; ?>
 
-					</div>
-				</div>
-				<div class="form-group">
-					 <label for="password" class="col-sm-2 control-label">Password</label>
-					<div class="col-sm-10">
-						<?php 
-							echo form_error('password', '<font color=red>', '</font><br \>');
-							echo form_password('password', set_value('password')).'<br />'; ?>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<div class="checkbox">
-							 <label><input type="checkbox" /> Remember me</label>
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<?php  echo form_submit('submit', 'Log in');?>
-					</div>
-				</div>
-			<?php form_close(); ?>
+<?php echo form_open('customer/dologin'); ?>
+
+<?php if (isset($error) && $error): ?>
+          <div class="alert alert-error">
+            <a class="close" data-dismiss="alert" href="#">×</a>Incorrect Email or Password!
+          </div>
+<?php endif; ?>
+
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" id="password" placeholder="Password" name="password" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"> Remember me
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default" name="submit">Sign in</button>
+    </div>
+  </div>
+<?php form_close(); ?>

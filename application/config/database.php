@@ -49,10 +49,10 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = 'password';
-$db['default']['database'] = 'myshop';
-$db['default']['dbdriver'] = 'mysql';
+$db['default']['username'] = 'enginee6_bike';
+$db['default']['password'] = 'bikebike';
+$db['default']['database'] = 'enginee6_bike';
+$db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;

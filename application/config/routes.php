@@ -43,7 +43,9 @@ $route['renters'] = "renters";
 $route['404_override'] = '';
 $route['checkout'] = 'checkout';
 
-$route['admin'] = 'admin_product/index';
+$route['admin'] = 'admin_login/index';
+$route['admin/login_user'] = 'admin_login/login_user';
+$route['admin/logout_user'] = 'admin_login/logout_user';
 
 $route['admin/product'] = 'admin_product/index';
 $route['admin/product/add'] = 'admin_product/add';
@@ -51,6 +53,13 @@ $route['admin/product/update'] = 'admin_product/update';
 $route['admin/product/update/(:any)'] = 'admin_product/update/$1';
 $route['admin/product/delete/(:any)'] = 'admin_product/delete/$1';
 $route['admin/product/(:any)'] = 'admin_product/index/$1';
+
+$route['admin/promotion'] = 'admin_promotion/index';
+$route['admin/promotion/add'] = 'admin_promotion/add';
+$route['admin/promotion/update'] = 'admin_promotion/update';
+$route['admin/promotion/update/(:any)'] = 'admin_promotion/update/$1';
+$route['admin/promotion/delete/(:any)'] = 'admin_promotion/delete/$1';
+$route['admin/promotion/(:any)'] = 'admin_promotion/index/$1';
 
 $route['admin/category'] = 'admin_category/index';
 $route['admin/category/add'] = 'admin_category/add';

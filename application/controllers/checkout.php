@@ -26,6 +26,7 @@ class checkout extends CI_Controller {
 	function step1()
     {
 
+        //login user
         if ( $this->session->userdata('logged'))
         {
 			$customerid = $this->Customer_model->get_customer_id($this->session->userdata('email'));
@@ -37,14 +38,17 @@ class checkout extends CI_Controller {
 			}
 			else
 			{
+                $data['error'] = $show_error;
 				$data['main_content'] = 'checkout/formaddress_view';
                 $this->load->view('includes/template', $data);
 			}
         }
         else 
         {
+            //not login
 			if ( !$this->session->userdata('billaddress') || !$this->session->userdata('shipaddress'))
 			{
+                $data['error'] = $show_error;
                 $data['main_content'] = 'checkout/formaddress_view';
                 $this->load->view('includes/template', $data);
 			}
@@ -63,54 +67,70 @@ class checkout extends CI_Controller {
 
 	function saveAddress()
 	{
-		$billaddress = array(
-                'firstname' => $this->input->post('firstname'),
-                'lastname' => $this->input->post('lastname'),
-                'email' => $this->input->post('email'),
-                'phone' => $this->input->post('phone'),
-                'bill_firstname' => $this->input->post('firstname'),
-                'bill_lastname' => $this->input->post('lastname'),
-                'bill_email' => $this->input->post('email'),
-                'bill_phone' => $this->input->post('phone'),
-                'bill_address1' => $this->input->post('address1'),
-                'bill_address2' => $this->input->post('address2'),
-                'bill_city' => $this->input->post('city'),
-                'bill_zip' => $this->input->post('zip'),
-            );
-                $this->session->set_userdata('billaddress', $billaddress);
 
-        if ($this->input->post('ship') == 'yes')
-        {
-        $shipaddress = array(
-                'ship_firstname' => $this->input->post('firstname'),
-                'ship_lastname' => $this->input->post('lastname'),
-                'ship_email' => $this->input->post('email'),
-                'ship_phone' => $this->input->post('phone'),
-                'ship_address1' => $this->input->post('address1'),
-                'ship_address2' => $this->input->post('address2'),
-                'ship_city' => $this->input->post('city'),
-                'ship_zip' => $this->input->post('zip')
+        $this->form_validation->set_rules('firstname', 'First Name', 'required');
+        $this->form_validation->set_rules('lastname', 'Last Name', 'required');
+        $this->form_validation->set_rules('phone', 'Phone', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required');
+        $this->form_validation->set_rules('address1', 'Address1', 'required');
+        $this->form_validation->set_rules('city', 'City', 'required');
+        $this->form_validation->set_rules('zip', 'Postcode', 'required');
+       if ($this->form_validation->run())
+       {
+    		$billaddress = array(
+                    'firstname' => $this->input->post('firstname'),
+                    'lastname' => $this->input->post('lastname'),
+                    'email' => $this->input->post('email'),
+                    'phone' => $this->input->post('phone'),
+                    'bill_firstname' => $this->input->post('firstname'),
+                    'bill_lastname' => $this->input->post('lastname'),
+                    'bill_email' => $this->input->post('email'),
+                    'bill_phone' => $this->input->post('phone'),
+                    'bill_address1' => $this->input->post('address1'),
+                    'bill_address2' => $this->input->post('address2'),
+                    'bill_city' => $this->input->post('city'),
+                    'bill_zip' => $this->input->post('zip'),
                 );
+                    $this->session->set_userdata('billaddress', $billaddress);
+
+            if (isset($this->input->post('ship')))
+            {
+            $shipaddress = array(
+                    'ship_firstname' => $this->input->post('firstname'),
+                    'ship_lastname' => $this->input->post('lastname'),
+                    'ship_email' => $this->input->post('email'),
+                    'ship_phone' => $this->input->post('phone'),
+                    'ship_address1' => $this->input->post('address1'),
+                    'ship_address2' => $this->input->post('address2'),
+                    'ship_city' => $this->input->post('city'),
+                    'ship_zip' => $this->input->post('zip')
+                    );
+                    $this->session->set_userdata('shipaddress', $shipaddress);
+                    redirect('checkout/step2');	
+            }
+            else
+            {
+                $shipaddress = false;
                 $this->session->set_userdata('shipaddress', $shipaddress);
-                redirect('checkout/step2');	
-        }
-        else
-        {
-            redirect('checkout/addshipaddress');
+                redirect('checkout/addshipaddress');
+            }
+        } else {
+            $this->show_addressform(true);
         }
 	}
 	
 	function step2()
 	{
 		
-		$data['main_content'] = 'checkout/showadddress_view';
-		$data['cart'] = $this->cart->contents();
-        if ($this->session->userdata('logged'))
+
+        if ($this->session->userdata('logged') && ($this->session->userdata('billaddress') && $this->session->userdata('shipaddress')))
         {
             $customerid = $this->Customer_model->get_customer_id($this->session->userdata('email'));
             $data['billaddress'] = $this->Customer_model->get_billaddress($customerid);
             $data['shipaddress'] = $this->Customer_model->get_shipaddress($customerid);
-        }   
+        }
+        $data['cart'] = $this->cart->contents();   
+        $data['main_content'] = 'checkout/showadddress_view';
         $this->load->view('includes/template', $data);
 
 	}
@@ -208,9 +228,36 @@ class checkout extends CI_Controller {
                 $data['billaddress'] = $this->Customer_model->get_billaddress($customerid);
                 $data['shipaddress'] = $this->Customer_model->get_shipaddress($customerid);
             }
+            $this->cutStock($data['cart']);
             $this->cart->destroy();
             $data['main_content'] = 'checkout/summary_view';
             $this->load->view('includes/template', $data);
 	}
 
+    function cutStock($product)
+    {
+        foreach ($product as $item)
+        {
+            $productid = $item['id'];
+            $orderqty = $item['qty'];
+        }
+        $query = $this->db->select('quantity')->get_where('products', array('id' => $productid));
+        foreach ($query->result() as $row)
+        {
+                $quantity =  $row->quantity;
+        }
+        $remainqty = $quantity - $orderqty;
+        $data = array(
+            'quantity' => $remainqty
+        );
+        $this->db->where('id', $productid);
+        $this->db->update('products', $data);
+    }
+
+    function show_addressform( $show_error = false ) {
+        $data['error'] = $show_error;
+        $this->load->helper('form');
+        $data['main_content'] = 'checkout/formaddress_view';
+        $this->load->view('includes/template', $data);
+    }
 }

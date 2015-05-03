@@ -26,10 +26,7 @@
   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo base_url(); ?>assets/img/apple-touch-icon-72-precomposed.png">
   <link rel="apple-touch-icon-precomposed" href="<?php echo base_url(); ?>assets/img/apple-touch-icon-57-precomposed.png">
   <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/img/favicon.png">
-  
-	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
-	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/scripts.js"></script>
+
 </head>
 
 <body>
@@ -39,6 +36,26 @@
       <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="<?php echo base_url(); ?>">Bikeshop</a>
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="<?php echo base_url(); ?>">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
+                  <?php
+                    foreach ($categories as $item){
+                        echo "<li><a href=\"" . base_url() ."shop2/category/" . $item->id ."\">" . $item->name . "</a></li>";
+                    }
+                  ?>             
+                </ul>
+              </li>
+            </ul>
         </div>
         
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

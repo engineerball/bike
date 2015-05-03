@@ -26,6 +26,7 @@ class Customer extends CI_Controller {
 	
 	function dosignup()
 	{
+		/*
 		$this->form_validation->set_rules('firstname', 'First Name', 'required');
 		$this->form_validation->set_rules('lastname', 'Last Name', 'required');
 		$this->form_validation->set_rules('phone', 'Phone', 'required');
@@ -60,6 +61,48 @@ class Customer extends CI_Controller {
 		} else {
             redirect('customer/signup');
 		}
+*/
+		$this->form_validation->set_rules('firstname', 'First Name', 'required');
+		$this->form_validation->set_rules('lastname', 'Last Name', 'required');
+		$this->form_validation->set_rules('phone', 'Phone', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required');
+		$this->form_validation->set_rules('clear_pass', 'Password', 'required');
+
+ 		$this->form_validation->set_error_delimiters('<font color=red>','</font>');
+ 		if ($this->form_validation->run())
+ 		{
+			$firstname = $this->input->post('firstname');
+	        $lastname = $this->input->post('lastname');
+	        $phone = $this->input->post('phone');
+	        $clear_pass = $this->input->post('password');
+	        $email = $this->input->post('email');
+
+	        if (!$this->Customer->check_email($this->input->post('email')))
+			{
+				$customer_data = array(
+	                                'firstname' => $firstname,
+	                                'lastname' => $lastname,
+	                                'phone' => $phone,
+	                                'email' => $email,
+	                                'password' => md5($clear_pass));
+
+				 if (!$this->form_validation->run() == FALSE )
+			    {
+				    $this->load->view('signup_view');
+	            }    
+	            else 
+	            {
+		            $this->Customer->add_customer($customer_data);
+	                redirect('customer/login');
+			    }
+			} else {
+	            //redirect('customer/signup');
+	            $this->show_signup(true);
+			}
+		} else {
+			 $this->show_signup(true);
+		}
+
 	}
 	
 	function login()
@@ -70,10 +113,26 @@ class Customer extends CI_Controller {
 
 	function dologin()
 	{
-		$this->form_validation->set_rules('email', 'Email', 'required');
-		$this->form_validation->set_rules('password', 'Password', 'required');
-		$this->form_validation->set_error_delimiters('<font color=red>','</font>');
-		if ($this->input->post('submit'))
+		//$this->form_validation->set_rules('email', 'Email', 'required');
+		//$this->form_validation->set_rules('password', 'Password', 'required');
+		//$this->form_validation->set_error_delimiters('<font color=red>','</font>');
+		$email = $this->input->post('email');
+		$password = $this->input->post('password');
+		if( $email && $password && $this->Customer->_checkuser($email,$password)) {
+            // If the user is valid, redirect to the main view
+            $data = array(
+						'email' => $email,
+						'logged' => TRUE
+					);
+			$this->session->set_userdata($data);
+			redirect($this->session->flashdata('redirectToCurrent'));
+        } else {
+        	$this->show_login(true);
+        }
+
+
+
+		/*if ($this->input->post('submit'))
 		{
 			$email = $this->input->post('email');
 			$password = $this->input->post('password');
@@ -87,7 +146,6 @@ class Customer extends CI_Controller {
 						'logged' => TRUE
 					);
 					$this->session->set_userdata($data);
-#					redirect('shopping');
 					redirect($this->session->flashdata('redirectToCurrent'));
 				} else {
 					$this->session->set_flashdata('msg_error', 'Invalid password');
@@ -96,7 +154,7 @@ class Customer extends CI_Controller {
 			} else {
 				redirect('customer/login');
 			}
-		}
+		}*/
 	
 	}
 
@@ -160,6 +218,18 @@ class Customer extends CI_Controller {
                 redirect('/');
             }
 
+    }
+
+    function show_login( $show_error = false ) {
+        $data['error'] = $show_error;
+        $this->load->helper('form');
+        $this->load->view('signin_view',$data);
+    }
+
+    function show_signup( $show_error = false ) {
+        $data['error'] = $show_error;
+        $this->load->helper('form');
+        $this->load->view('signup_view',$data);
     }
 
 	function logout()

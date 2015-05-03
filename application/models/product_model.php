@@ -12,7 +12,7 @@ Class Product_model extends CI_Model
     function get_all_products()
     {
         $this->db->order_by('name', 'ASC');
-        $result = $this->db->get('products');
+        $result = $this->db->select('*')->where('enabled =', 1)->where('quantity >', 0)->get('products');
 
         return  $result->result();
     }   
@@ -27,7 +27,23 @@ Class Product_model extends CI_Model
 
         return $result;
     }
+    function get_products($id)
+    {
+        $product = $this->db->select('*')->from('products')->where('category_id', $id)->get()->result();
+        return $product;
 
+    }
+    function count_products($id)
+    {
+        $count = $this->db->select('count(*) as Total')
+                        ->from('products')
+                        ->join('categories', 'categories.id = products.category_id', 'left')
+                        ->group_by('categories.id')
+                        ->get()
+                        ->result();
+        return $count;
+
+    }
     function get_product_categories($id)
     {
         return $this->db->where('product_id', $id)->join('categories', 'category_id = categories.id')->get('category_products')->result();

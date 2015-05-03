@@ -15,6 +15,7 @@ class Shop2 extends CI_Controller {
         {
 		$data['products'] = $this->Product_model->get_all_products();
 #		$data['shops'] = $this->Shop->_getShopDropDown();
+        $data['categories'] = $this->Category_model->get_categories();
 
 		$data['main_content'] = 'shop/index_view';
 		$this->load->view('includes/template', $data);
@@ -42,6 +43,7 @@ class Shop2 extends CI_Controller {
                $data['product']->images = $data['product']->images;
            }
 
+           $data['categories'] = $this->Category_model->get_categories();
            $data['main_content'] = 'shop/product_view';
            $this->load->view('includes/template', $data);
        }
@@ -50,7 +52,7 @@ class Shop2 extends CI_Controller {
         {
             $data['category'] = $this->Category_model->get_category($id);
             
-            if (!$data['category'] || $data['category']->enable==0)
+            if (!$data['category'] || $data['category']->enable == 0)
             {
                 show_404();
             }
@@ -60,6 +62,7 @@ class Shop2 extends CI_Controller {
         #    $base_url   = $this->uri->segment_array();
             
             $data['products'] = $this->Product_model->get_products($data['category']->id);
+            $data['categories'] = $this->Category_model->get_categories();
             $data['main_content'] = 'shop/category_view';
             $this->load->view('includes/template', $data);
         }
@@ -110,6 +113,7 @@ class Shop2 extends CI_Controller {
             $data['page_title'] = 'View Cart';
             $data['main_content'] = 'shop/cart_view';
             $data['cart'] = $this->cart->contents();
+            $data['categories'] = $this->Category_model->get_categories();
             $this->load->view('includes/template', $data);
         }
 
