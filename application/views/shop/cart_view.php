@@ -73,7 +73,7 @@
                 <a class="btn btn-default" href="/shop2">Select item</a>
         <?php 	} else { ?>
         	<a class="btn btn-default" href="/shop2">Select item</a>
-        	<a class="btn btn-success" href="/shop2/checkout">Confirm</a>
+        	<a class="btn btn-primary" href="/shop2/checkout">Confirm</a>
         	<a class="btn btn-danger" href="/shop2/destroy">Cancel</a>
         	
         <?php }?>
