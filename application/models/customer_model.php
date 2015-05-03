@@ -60,7 +60,7 @@ Class Customer_model extends CI_Model
 		if ($query->num_rows() > 0)
 		{
 			$result = $query->row()->customer_id;
-			echo "This is from address list id ".$result."<br />";
+			//echo "This is from address list id ".$result."<br />";
 			return $result;
 		}
 	}
@@ -123,16 +123,16 @@ Class Customer_model extends CI_Model
         //  
         if($address_id)
         {
-			echo "Update db if $address_id is not empty with <br />";
-						var_dump($data);
-						echo "<br />";
+		//	echo "Update db if $address_id is not empty with <br />";
+						//var_dump($data);
+					//	echo "<br />";
 			$result = $this->db->where('customer_id', $customer_id)
 								->update('customers_address_bank', $data);		
             return $customer_id;
         } else {
-			echo "insert db if $address_id is empty with<br />";
-			var_dump($data);
-						echo "<br />";
+			//echo "insert db if $address_id is empty with<br />";
+			//var_dump($data);
+			//			echo "<br />";
             $this->db->insert('customers_address_bank', $data);
             return $this->db->insert_id();
         }

@@ -172,6 +172,92 @@ class Customer extends CI_Controller {
         $this->load->view('includes/template', $data);
     }
 
+	function action_billaddress()
+    {
+    	$customerID = $this->Customer->get_customer_id($this->session->userdata('email'));
+    	$billaddress = $this->Customer->get_billaddress($customerID);
+    	if ($billaddress)
+    	{
+    		$data['address'] = $billaddress;
+    		$data['main_content'] = 'checkout/formaddress_edit';
+        	$this->load->view('includes/template', $data);
+    	} else
+    	{
+    		$data['main_content'] = 'checkout/formaddress_view';
+        	$this->load->view('includes/template', $data);
+    	}
+    }
+	
+	function action_shipaddress()
+    {
+    	$customerID = $this->Customer->get_customer_id($this->session->userdata('email'));
+    	$shipaddress = $this->Customer->get_shipaddress($customerID);
+    	if ($shipaddress)
+    	{
+    		$data['address'] = $shipaddress;
+    		$data['main_content'] = 'checkout/formaddress_edit';
+        	$this->load->view('includes/template', $data);
+    	} else
+    	{
+    		$data['main_content'] = 'checkout/formaddress_view';
+        	$this->load->view('includes/template', $data);
+    	}
+    }
+
+    function showaddress()
+    {
+    	$customerID = $this->Customer->get_customer_id($this->session->userdata('email'));
+    	$billaddress = $this->Customer->get_billaddress($customerID);
+    	$shipaddress = $this->Customer->get_shipaddress($customerID);
+
+    	$data['billaddress'] = $billaddress;
+    	$data['shipaddress'] = $shipaddress;
+    	$data['main_content'] = 'member/show_address';
+        $this->load->view('includes/template', $data);
+    }
+
+    function save_customer_billaddress()
+    {
+    	$customerID = $this->Customer->get_customer_id($this->session->userdata('email'));
+        $member = $this->Customer->get_customer($customerID);
+		$address_id = $this->Customer->get_address_list_id($customerID);
+
+		$billaddress = array(
+                'customer_id' => $customerID,
+                'bill_firstname' => $member->firstname,
+                'bill_lastname' => $member->lastname,
+                'bill_email' => $member->email,
+                'bill_phone' => $member->phone,
+                'bill_address1' => $this->input->post('address1'),
+                'bill_address2' => $this->input->post('address2'),
+                'bill_city' => $this->input->post('city'),
+                'bill_zip' => $this->input->post('zip'),
+            );
+		$result =  $this->Customer->save_address($customerID, $billaddress, $address_id);
+		 redirect('/customer/showaddress');
+    }
+
+    function save_customer_shipaddress()
+    {
+    	$customerID = $this->Customer->get_customer_id($this->session->userdata('email'));
+        $member = $this->Customer->get_customer($customerID);
+		$address_id = $this->Customer->get_address_list_id($customerID);
+
+		$shipaddress = array(
+                'customer_id' => $customerID,
+                'ship_firstname' => $member->firstname,
+                'ship_lastname' => $member->lastname,
+                'ship_email' => $member->email,
+                'ship_phone' => $member->phone,
+                'ship_address1' => $this->input->post('address1'),
+                'ship_address2' => $this->input->post('address2'),
+                'ship_city' => $this->input->post('city'),
+                'ship_zip' => $this->input->post('zip'),
+            );
+		$result =  $this->Customer->save_address($customerID, $shipaddress, $address_id);
+		 redirect('/customer/showaddress');
+    }
+
     function save_billaddress()
     {
         $customerID = $this->Customer->get_customer_id($this->session->userdata('email'));

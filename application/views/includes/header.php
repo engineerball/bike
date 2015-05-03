@@ -98,7 +98,7 @@
                 <li>
 		<?php
 			if ($this->session->userdata('email')) {
-				echo '<a href="'.base_url().'customer/add_address">Address</a>';
+				echo '<a href="'.base_url().'customer/showaddress">Address</a>';
 				echo '<a href="'.base_url().'customer/logout">Log Out</a>';
 			} else {
 				echo '<a href="'.base_url().'customer/login">Log In</a>';
