@@ -92,8 +92,8 @@ class checkout extends CI_Controller {
                     'bill_zip' => $this->input->post('zip'),
                 );
                     $this->session->set_userdata('billaddress', $billaddress);
-
-            if (isset($this->input->post('ship')))
+                    $isShip = $this->input->post('ship');
+            if (isset($isShip))
             {
             $shipaddress = array(
                     'ship_firstname' => $this->input->post('firstname'),
