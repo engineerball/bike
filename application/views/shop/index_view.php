@@ -1,3 +1,14 @@
+        <div class="jumbotron">
+                <h1>
+                มองหารถจักรยานอยู่หรือเปล่า?    
+                </h1>
+                <p>
+                    เรามีหลายสิ่งที่คุณต้องการ ลองเลือกชมสินค้าของเราสิครับ
+                </p>
+                <p>
+                    <a class="btn btn-primary btn-large" href="#">Go Go Go!</a>
+                </p>
+            </div>
  <div id="slider1_container" style="display: none; position: relative; margin: 0 auto; width: 1140px; height: 442px; overflow: hidden;">
 
             <!-- Loading Screen -->
@@ -104,17 +115,7 @@
         </div>
         <!-- Jssor Slider End -->
     </div>
-		<div class="jumbotron">
-				<h1>
-			    มองหารถจักรยานอยู่หรือเปล่า?	
-				</h1>
-				<p>
-                    เรามีหลายสิ่งที่คุณต้องการ ลองเลือกชมสินค้าของเราสิครับ
-				</p>
-				<p>
-					<a class="btn btn-primary btn-large" href="http://engineerball.com">Learn more</a>
-				</p>
-			</div>
+
 			<h3>
 			    Our products.	
 			</h3>

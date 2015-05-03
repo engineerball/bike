@@ -38,19 +38,27 @@ if($this->session->flashdata('msg_error'))
                                     }
                                     else
                                     {
-                                    echo '<strong>Billing address</strong><br />';
-                                    foreach ( $billaddress[0] as $item) {
-                                         echo $item . '<br />';
-                                   }
+                                        echo '<h2>Billing address</h2><br />';
+                                        echo '<p class="text-left">' . $billaddress[0]['bill_firstname'] . ' ' . $billaddress[0]['bill_lastname'] . '</p>';
+                                        echo '<p class="text-left">' . $billaddress[0]['bill_email'] . '</p>';
+                                        echo '<p class="text-left">' . $billaddress[0]['bill_address1'] . '</p>';
+                                        echo '<p class="text-left">' . $billaddress[0]['bill_address2'] . '</p>';
+                                        echo '<p class="text-left">' . $billaddress[0]['bill_city'] . '</p>';
+                                        echo '<p class="text-left">' . $billaddress[0]['bill_zip'] . '</p>';
+
                                 ?>
                             </div>
                         </div>
                     <div class="col-md-6 column">
                         <?php
-                            echo '<strong>Shipping address</strong><br />';
-                            foreach ( $shipaddress['0'] as $item) {
-                                echo $item . '<br />';
-                            }
+                            echo '<h2>Shipping address</h2><br />';
+                            $shipaddress = $this->session->userdata('shipaddress');
+                            echo '<p class="text-left">' . $shipaddress[0]['ship_firstname'] . ' ' . $shipaddress[0]['ship_lastname'] . '</p>';
+                            echo '<p class="text-left">' . $shipaddress[0]['ship_email'] . '</p>';
+                            echo '<p class="text-left">' . $shipaddress[0]['ship_address1'] . '</p>';
+                            echo '<p class="text-left">' . $shipaddress[0]['ship_address2'] . '</p>';
+                            echo '<p class="text-left">' . $shipaddress[0]['ship_city'] . '</p>';
+                            echo '<p class="text-left">' . $shipaddress[0]['ship_zip'] . '</p>';
 
                             }
                         ?>

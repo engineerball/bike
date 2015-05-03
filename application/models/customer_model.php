@@ -97,6 +97,8 @@ Class Customer_model extends CI_Model
         if(!empty($billaddress))
         {
             return $billaddress;
+        } else {
+            return false;
         }
         
     }
@@ -107,6 +109,8 @@ Class Customer_model extends CI_Model
         if(!empty($shipaddress))
         {
             return $shipaddress;
+        } else {
+            return false;
         }
         
     }

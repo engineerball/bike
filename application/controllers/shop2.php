@@ -52,7 +52,8 @@ class Shop2 extends CI_Controller {
         {
             $data['category'] = $this->Category_model->get_category($id);
             
-            if (!$data['category'] || $data['category']->enable == 0)
+            //if (!$data['category'] || $data['category']->enable == 0)
+            if (!$data['category'])
             {
                 show_404();
             }

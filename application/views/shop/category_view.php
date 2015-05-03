@@ -1,14 +1,14 @@
-			<div class="jumbotron">
-				<h1>
-			    มองหารถจักรยานอยู่หรือเปล่า?	
-				</h1>
-				<p>
+        <div class="jumbotron">
+                <h1>
+                มองหารถจักรยานอยู่หรือเปล่า?    
+                </h1>
+                <p>
                     เรามีหลายสิ่งที่คุณต้องการ ลองเลือกชมสินค้าของเราสิครับ
-				</p>
-				<p>
-					<a class="btn btn-primary btn-large" href="#">Learn more</a>
-				</p>
-			</div>
+                </p>
+                <p>
+                    <a class="btn btn-primary btn-large" href="#">Go Go Go!</a>
+                </p>
+            </div>
 			<h3>
 			    Our products.	
 			</h3>

@@ -34,6 +34,8 @@ class checkout extends CI_Controller {
             $shipaddress = $this->Customer_model->get_shipaddress($customerid);
             if (!empty($billaddress) && !empty($shipaddress))
 			{	
+                $this->session->set_userdata('billaddress', $billaddress);
+                $this->session->set_userdata('shipaddress', $shipaddress);
 				redirect('checkout/step2');
 			}
 			else
@@ -48,7 +50,11 @@ class checkout extends CI_Controller {
             //not login
 			if ( !$this->session->userdata('billaddress') || !$this->session->userdata('shipaddress'))
 			{
-                $data['error'] = $show_error;
+                if (isset($show_error))
+                {
+                    $data['error'] = $show_error;
+                }
+
                 $data['main_content'] = 'checkout/formaddress_view';
                 $this->load->view('includes/template', $data);
 			}
