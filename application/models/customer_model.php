@@ -53,6 +53,12 @@ Class Customer_model extends CI_Model
             return false;
         }
     }
+
+    function get_customer_id_by_token($token)
+    {
+        $result = $this->db->select('id')->get_where('customers', array('md5(1290*3+id)' => $token));
+        return $result->row()->id;
+    }
 	
 	function get_address_list_id($id)
 	{
@@ -242,6 +248,13 @@ Class Customer_model extends CI_Model
                 ->where('password', md5($password))
                 ->count_all_results('customers');
         return $result > 0 ? TRUE : FALSE;
+    }
+
+    function set_password($customerid, $password)
+    {   
+
+        $data['password'] = md5($password);
+        $result = $this->db->where('id',$customerid)->update('customers', $data);
     }
 
 }

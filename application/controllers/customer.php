@@ -117,7 +117,7 @@ class Customer extends CI_Controller {
 		//$this->form_validation->set_rules('password', 'Password', 'required');
 		//$this->form_validation->set_error_delimiters('<font color=red>','</font>');
 		$email = $this->input->post('email');
-		$password = $this->input->post('password');
+		$password = $this->input->post('clear_pass');
 		if( $email && $password && $this->Customer->_checkuser($email,$password)) {
             // If the user is valid, redirect to the main view
             $data = array(
@@ -323,4 +323,64 @@ class Customer extends CI_Controller {
 		$this->session->sess_destroy();
 		redirect('/');
 	}
+
+    function reset_password()
+    {
+        $data['main_content'] = 'member/reset_password';
+        $this->load->view('includes/template', $data);
+    }
+
+    function submit_reset_password()
+    {
+        $this->form_validation->set_rules('email', 'Email', 'required');
+        if ($this->form_validation->run())
+        {
+            $email = $this->input->post('email');
+            if ($this->Customer->check_email($email))
+            {
+                $id = $this->Customer->get_customer_id($email);
+                $encrypt = md5(1290*3+$id);
+                $message = "Your password reset link send to your e-mail address.";
+                $to=$email;
+                $subject="Forget Password";
+                $from = 'info@engineerball.com';
+                $body='Hi, <br/> <br/>Your Membership ID is '.$email.' <br><br>Click here to reset your password '. base_url() .'customer/process_reset/'.$encrypt.'/reset';
+                $headers = "From: " . strip_tags($from) . "\r\n";
+                $headers .= "Reply-To: ". strip_tags($from) . "\r\n";
+                $headers .= "MIME-Version: 1.0\r\n";
+                $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+                mail($to,$subject,$body,$headers);
+                redirect('/');
+            }
+            else {
+                echo "User not exist";
+            }
+        } else {
+            echo 'fail';
+        } 
+    }
+
+    function process_reset($token, $method)
+    {
+        $customerid = $this->Customer->get_customer_id_by_token($token);
+        if ($customerid){
+            if ($method = 'reset') 
+            {
+                $data['customerid'] = $customerid;
+                $data['main_content'] = 'member/reset_password_form';
+                $this->load->view('includes/template', $data);
+            }
+        } else
+        {
+            echo "not found";
+        }
+    }
+
+    function do_process_reset()
+    {
+        $customerid = $this->input->post('customerid');
+        $newpassword = $this->input->post('password');
+        $reset_password = $this->Customer->set_password($customerid, $newpassword);
+        redirect('/customer/login');
+    }
 }
