@@ -4,7 +4,7 @@
             <div class="panel panel-info" >
                     <div class="panel-heading">
                         <div class="panel-title">Sign In</div>
-                        <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>
+                        <!-- <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div> --> 
 
         <?php if (isset($error) && $error): ?>
           <div class="alert alert-error">
@@ -45,8 +45,6 @@
 
                                     <div class="col-sm-12 controls">
                                       <button type="submit" id="btn-login" name="submit" class="btn btn-success">Login  </button>
-                                      <button type="submit" id="btn-fblogin" name="submit" class="btn btn-primary">Login with Facebook</button>
-
                                     </div>
                                 </div>
 

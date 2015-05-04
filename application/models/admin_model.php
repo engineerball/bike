@@ -8,7 +8,51 @@ class Admin_model extends CI_Model {
 		parent::__construct();
 	}
 	
-    function getAllOrder()
+    function getAllOrder($orderby, $sortby)
+    {
+        $sort_order = ($sortby == 'DESC') ? 'DESC' : 'ASC';
+        $select = array('order_items.id AS `order_items_id`',
+            'products.name',
+            'products.price',
+            'order_items.quantity',
+            'order_items.subtotal',
+            'orders.order_number',
+            'orders.ordered_on',
+            'orders.shipped_on',
+            'orders.total',
+            'orders.firstname',
+            'orders.lastname',
+            'orders.email',
+            'orders.phone',
+            'orders.ship_firstname',
+            'orders.ship_lastname',
+            'orders.ship_email',
+            'orders.ship_phone',
+            'orders.ship_address1',
+            'orders.ship_address2',
+            'orders.ship_city',
+            'orders.ship_zip',
+            'orders.bill_lastname',
+            'orders.bill_firstname',
+            'orders.bill_email',
+            'orders.bill_phone',
+            'orders.bill_address1',
+            'orders.bill_address2',
+            'orders.bill_city',
+            'orders.bill_zip',
+            'orders.id AS `orders_id`');
+
+        $result = $this->db->select($select)
+            ->from('order_items')
+            ->join('orders', 'orders.id = order_items.order_id')
+            ->join('products', 'products.id = order_items.product_id')
+            ->order_by($orderby, $sortby)
+            ->get()
+            ->result();
+        return $result;
+    }
+
+ function getAllOrder2()
     {
         $select = array('order_items.id',
             'products.name',
@@ -40,13 +84,11 @@ class Admin_model extends CI_Model {
             'orders.bill_city',
             'orders.bill_zip');
 
-        $result = $this->db->select($select)
+        $result = $this->datatables->select($select)
             ->from('order_items')
             ->join('orders', 'orders.id = order_items.order_id')
             ->join('products', 'products.id = order_items.product_id')
-            ->order_by('order_items.id', 'ASC')
-            ->get()
-            ->result();
+            ->generate();
         return $result;
     }
 

@@ -61,6 +61,7 @@ $route['admin/promotion/update/(:any)'] = 'admin_promotion/update/$1';
 $route['admin/promotion/delete/(:any)'] = 'admin_promotion/delete/$1';
 $route['admin/promotion/(:any)'] = 'admin_promotion/index/$1';
 
+
 $route['admin/category'] = 'admin_category/index';
 $route['admin/category/add'] = 'admin_category/add';
 $route['admin/category/update'] = 'admin_category/update';
@@ -71,6 +72,16 @@ $route['admin/category/(:any)'] = 'admin_category/index/$1';
 $route['admin/order'] = 'admin_order/index';
 $route['admin/order/display_order_detail'] = 'admin_order/display_order_detail';
 $route['admin/order/display_order_detail/(:any)'] = 'admin_order/display_order_detail/$1';
+
+$route['admin/order/orderlist'] = 'admin_order/orderlist';
+$route['admin/order/orderlist/(:any)'] = 'admin_order/orderlist/$1';
+
+$route['admin/order/shipping'] = 'admin_order/shipping';
+$route['admin/order/shipping/(:any)'] = 'admin_order/shipping/$1';
+
+$route['admin/order/datatable'] = 'admin_order/datatable';
+$route['admin/order/datatable/(:any)'] = 'admin_order/datatable/$1';
+
 #$route['admin/order/add'] = 'admin_order/index';
 #$route['admin/order/update'] = 'admin_order/update';
 #$route['admin/order/update/(:any)'] = 'admin_order/update/$1';

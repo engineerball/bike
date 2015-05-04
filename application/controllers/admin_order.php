@@ -8,28 +8,38 @@ class Admin_order extends CI_Controller
         $this->load->database();
         $this->load->helper('url');
         $this->load->library('grocery_CRUD');
+        $this->load->library('Datatables');
+        $this->load->library('table');
         $this->load->model('Admin_model');
     }
 
-    function index()
+    function index($orderby = null, $sortby = null)
     {
-/*        $this->grocery_crud->set_table('order_items');
-        #$this->grocery_crud->set_relation_n_n('id','order_items','products','order_id','product_id','name','subtotal'); 
-        $this->grocery_crud->set_relation_n_n('name','orders','products','id','id','name','subtotal'); 
-        #$this->grocery_crud->set_relation('product_id', 'products', 'name' ); 
-        
-        $display = array('order_id','products.name','quantity','orders.firstname');
+        redirect('/admin/order/orderlist');
+    }
 
-        #$this->grocery_crud->columns($display);
-        $this->grocery_crud->set_theme('twitter-bootstrap');
-        $data = $this->grocery_crud->render();
-        $this->_example_output($data);
- */    
-       # redirect('admin/order/display_order'
-        $data['order'] = $this->Admin_model->getAllOrder();
+    function orderlist($sort_by = null, $sort_order = null)
+    {
+          if (!isset($sort_by))
+        {
+            $order = 'order_items_id';
+        } else
+        {
+            $order = $sort_by;
+        }
 
-        $this->load->view('admin/order_view.php', $data);
+        if (!isset($sort_order))
+        {
+            $sort = 'ASC';
+        } else
+        {
+            $sort = $sort_order;
+        }
+        $data['sort_by'] = $sort_by;
+        $data['sort_order'] = $sort_order;
+        $data['order'] = $this->Admin_model->getAllOrder($order, $sort);
 
+        $this->load->view('admin/order_sort_view.php', $data);
     }
 
     function _example_output($output = NULL)
@@ -37,9 +47,25 @@ class Admin_order extends CI_Controller
         $this->load->view('admin/template.php', $output);
     }
 
-    function display_order()
+    function display_order($orderby = null, $sortby = null)
     {
-        $data['order'] = $this->Admin_model->getAllOrder();
+        if (!isset($orderby))
+        {
+            $order = 'order_items.id';
+        } else
+        {
+            $order = $orderby;
+        }
+
+        if (!isset($sortby))
+        {
+            $sort = 'ASC';
+        } else
+        {
+            $sort = $sortby;
+        }
+
+        $data['order'] = $this->Admin_model->getAllOrder($sortby);
 
         $this->load->view('admin/order_view.php', $data);
     } 
@@ -50,5 +76,51 @@ class Admin_order extends CI_Controller
 
         $this->load->view('admin/order_detail_view.php', $data);
 
+    }
+
+    function test_datatables()
+    {
+              //set table id in table open tag
+        $tmpl = array ( 'table_open'  => '<table id="big_table" border="1" cellpadding="2" cellspacing="1" class="mytable">' );
+        $this->table->set_template($tmpl); 
+        
+        $this->table->set_heading('First Name','Last Name','Email');
+
+        //$data['order'] = $this->Admin_model->getAllOrder2();
+
+        //$this->load->view('admin/test-datatables', $data);
+        $this->load->view('admin/test-datatables');
+    }
+
+    function datatable()
+    {
+        $this->datatables->select('id,firstname,lastname,email')
+            ->unset_column('id')
+            ->from('orders');
+ 
+        echo $this->datatables->generate('json');
+    }
+
+    function shipping()
+    {
+        $this->grocery_crud->set_table('orders');
+       // $this->grocery_crud->set_theme('twitter-bootstrap');
+        $this->grocery_crud->edit_fields('shipped_on', 'notes');
+        #$this->grocery_crud->unset_jquery();
+        $this->grocery_crud->set_lang_string('update_success_message',
+     'Your data has been successfully stored into the database.<br/>Please wait while you are redirecting to the list page.
+     <script type="text/javascript">
+      window.location = "/admin/order/orderlist";
+     </script>
+     <div style="display:none">'
+);
+        $this->grocery_crud->unset_back_to_list();
+        $data = $this->grocery_crud->render();
+        $this->_example_output($data);
+    }
+
+    function redirect($url)
+    {
+        redirect($url);
     }
 }

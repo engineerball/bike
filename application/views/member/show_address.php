@@ -25,7 +25,6 @@ if($this->session->flashdata('msg_error'))
                 <div class="col-md-6 column">
                     <?php
                             echo '<h2>Shipping address</h2><br />';
-                        	$shipaddress = $this->session->userdata('shipaddress');
                             echo '<strong>Name : </strong><p class="text-left">' . $shipaddress[0]['ship_firstname'] . ' ' . $shipaddress[0]['ship_lastname'] . '</p>';
                             echo '<strong>E-mail : </strong><p class="text-left">' . $shipaddress[0]['ship_email'] . '</p>';
                             echo '<strong>Address line 1 : </strong><p class="text-left">' . $shipaddress[0]['ship_address1'] . '</p>';
