@@ -24,7 +24,8 @@
                     <tr><td class="text-left"><strong>#Order detail ID</strong></td><td><?php echo $loop->id;?></td></tr>
                     <tr><td><strong>Order Number</strong></td><td><?php echo $loop->order_number?></td></tr>
                     <tr><td><strong>Total</strong></td><td><?php echo $loop->total;?></td></tr>
-                    <td><strong>Order Date</strong></td><td><?php echo $loop->ordered_on;?></td></tr>
+                    <tr><td><strong>Order Date</strong></td><td><?php echo $loop->ordered_on;?></td></tr>
+                    <tr><td><strong>Shipping Date</strong></td><td><?php echo $loop->shipped_on;?></td></tr>
                     <tr><td><strong>Order First</strong></td><td><?php echo $loop->firstname;?></td></tr>
                     <tr><td><strong>Order Lastname</strong></td><td><?php echo $loop->lastname;?></td></tr>
                     <tr><td><strong>Order email</strong></td><td><?php echo $loop->email;?></td></tr>
@@ -44,7 +45,8 @@
                     <tr><td><strong>Bill to address1</strong></td><td><?php echo $loop->bill_address1;?></td></tr>
                     <tr><td><strong>Bill to address2</strong></td><td><?php echo $loop->bill_address2;?></td></tr>
                     <tr><td><strong>Bill to city</strong></td><td><?php echo $loop->bill_city;?></td></tr>
-                    <tr><td><strong>Bill to postcode</strong></td><td><?php echo $loop->bill_zip;?></td></tr>   
+                    <tr><td><strong>Bill to postcode</strong></td><td><?php echo $loop->bill_zip;?></td></tr>
+                    <tr><td><strong>Notes</strong></td><td><?php echo $loop->notes;?></td></tr>    
                     <?php } 
                     }?>
                     </table>

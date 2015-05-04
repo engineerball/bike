@@ -40,6 +40,7 @@ class Admin_model extends CI_Model {
             'orders.bill_address2',
             'orders.bill_city',
             'orders.bill_zip',
+            'orders.notes',
             'orders.id AS `orders_id`');
 
         $result = $this->db->select($select)

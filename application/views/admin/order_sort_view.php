@@ -27,6 +27,7 @@
                         <td><strong>Order Number</strong></td>
                         <td><strong><?php echo anchor('admin/order/orderlist/ordered_on/'.(($sort_order == 'ASC' && $sort_by == 'ordered_on') ? 'DESC' : 'ASC'),'Order Date');?></strong></td>
                         <td><strong><?php echo anchor('admin/order/orderlist/shipped_on/'.(($sort_order == 'ASC' && $sort_by == 'shipped_on') ? 'DESC' : 'ASC'),'Shipping Date');?></strong></td>
+                        <td><strong>Comment</strong></td>
                     </tr>
                     <?php if(is_array($order) && count($order) ) {
                         foreach($order as $loop){
@@ -41,6 +42,7 @@
                         <td><?php echo '<a href ="' . base_url() . 'admin/order/display_order_detail/' . $loop->order_number.'">'.$loop->order_number.'</a>';?></td>
                         <td><?php echo $loop->ordered_on;?></td>
                         <td><?php echo anchor('admin/order/shipping/edit/'.$loop->orders_id, $loop->shipped_on);?></td>
+                        <td><?php echo $loop->notes; ?></td>
                     </tr>
                     <?php } 
                     }?>
