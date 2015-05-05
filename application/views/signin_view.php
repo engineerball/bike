@@ -62,9 +62,9 @@
                 <li>
 		<?php
 			if ($this->session->userdata('username')) {
-				echo '<a href="'.base_url().'renters/logout">Log Out</a>';
+				echo '<a href="'.base_url().'customer/logout">Log Out</a>';
 			} else {
-				echo '<a href="'.base_url().'renters/signup">Register</a>';
+				echo '<a href="'.base_url().'customer/signup">Register</a>';
 			}
 		?>
                 </li>
