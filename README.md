@@ -1,3 +1,3 @@
-Bike 
+Bike shop 
 =====
-A system for rental bicycle from our shop
+Project bicycle shop running with php codeigniter and mysql
