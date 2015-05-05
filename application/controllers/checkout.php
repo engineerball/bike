@@ -3,7 +3,7 @@ class checkout extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model(array('Order_model','Customer_model'));
+		$this->load->model(array('Order_model','Customer_model','Category_model'));
 		$this->load->library(array('cart', 'session', 'form_validation'));
 		$this->load->helper(array('url', 'html', 'form'));
         $this->load->database();
@@ -17,7 +17,7 @@ class checkout extends CI_Controller {
                 $data['cart'] = $this->cart->contents();
                 $this->session->set_flashdata('redirectToCurrent', current_url());
                 #$this->load->view('shopping/index_view', $data);
-
+                $data['categories'] = $this->Category_model->get_categories();   
                 $data['main_content'] = 'checkout/formaddress_view';
                 $this->load->view('includes/template', $data);
 
@@ -135,7 +135,8 @@ class checkout extends CI_Controller {
             $data['billaddress'] = $this->Customer_model->get_billaddress($customerid);
             $data['shipaddress'] = $this->Customer_model->get_shipaddress($customerid);
         }
-        $data['cart'] = $this->cart->contents();   
+        $data['cart'] = $this->cart->contents();
+        $data['categories'] = $this->Category_model->get_categories();   
         $data['main_content'] = 'checkout/showadddress_view';
         $this->load->view('includes/template', $data);
 
@@ -237,6 +238,7 @@ class checkout extends CI_Controller {
             $this->cutStock($data['cart']);
             $this->cart->destroy();
             $data['main_content'] = 'checkout/summary_view';
+            $data['categories'] = $this->Category_model->get_categories();   
             $this->load->view('includes/template', $data);
 	}
 
