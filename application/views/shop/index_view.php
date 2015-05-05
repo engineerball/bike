@@ -126,7 +126,7 @@
 	foreach ($products as $item){
 ?>
 						<div class="col-md-4 column">
-							<img alt="140x140" src="<?php echo base_url()."assets/uploads/files/products/".$item->images; ?>" />
+							<a href="<?php echo base_url().'shop2/product/'.$item->id ; ?>" ><img alt="140x140" src="<?php echo base_url()."assets/uploads/files/products/".$item->images; ?>" /></a>
 							<dl>
 								<dt>
                                 <a href="<?php echo base_url().'shop2/product/'.$item->id ; ?>" ><?php echo $item->name; ?></a>
