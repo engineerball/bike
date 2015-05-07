@@ -14,6 +14,7 @@
 	
 	<link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 
   <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>
@@ -109,6 +110,18 @@
               </ul>
             </li>
           </ul>
+
+        <form class="navbar-form" role="search" action="<?php echo site_url('shop2/search'); ?>" method="post">
+        <div class="input-group">
+            <input type="text" class="form-control pull-right" style="width: 300px; margin-right: 35px, border: 1px solid black; " placeholder="Search" name="Search">
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+            </div>
+        </div>
+        </form>
+
+
+
         </div>
         
       </nav>

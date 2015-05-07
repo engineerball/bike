@@ -214,5 +214,4 @@ $(function () {
   };
 
   App.init();
-
 });

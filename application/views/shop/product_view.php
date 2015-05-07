@@ -1,8 +1,10 @@
 			<div class="row clearfix">
-				<div class="col-md-3 column">
+				<div class="col-md-1 column">
                 </div>
-				<div class="col-md-6 column">
-                <img alt="140x140" src="<?php echo base_url().'assets/uploads/files/products/'.$product->images; ?>" class="img-rounded" />
+				<div class="col-md-10 column">
+					<div class="thumbnail-detail">
+					    <a href="<?php echo base_url().'assets/uploads/files/products/'.$product->images; ?>"><img src="<?php echo base_url().'assets/uploads/files/products/'.$product->images; ?>" alt="image title" ></a>
+					</div>
 					<dl>
 						<dt>
 <?php echo $product->name; ?>
@@ -31,11 +33,11 @@
                         </dd>
 					</dl> <!--<button type="button" class="btn btn-primary btn-default">Add</button> -->
 <?php   
-    echo form_submit("submit", "Add");
+    echo form_submit("submit", "Add to cart");
     echo form_close();
 ?> 
 				</div>
-				<div class="col-md-3 column">
+				<div class="col-md-1 column">
 				</div>
 			</div>
 		</div>

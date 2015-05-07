@@ -128,4 +128,79 @@ Class order_model extends CI_Model
         );    
         $this->db->insert('order_items', $data);
     }
+
+    function printOrder($data, $cart)
+    {
+        $order = $this->session->userdata('order');
+        $message = '<h2>Billing address</h2><br />'.
+        '<p class="text-left">' . $data['order']['firstname'] . ' ' . $data['order']['lastname'] . '</p>'.
+        '<p class="text-left">' . $data['order']['email'] . '</p>'.
+        '<p class="text-left">' . $data['order']['bill_address1'] . '</p>'.
+        '<p class="text-left">' . $data['order']['bill_address2'] . '</p>'.
+        '<p class="text-left">' . $data['order']['bill_city'] . '</p>'.
+        '<p class="text-left">' . $data['order']['bill_zip'] . '</p>'.
+        '<h2>Shipping address</h2><br />'.
+        '<p class="text-left">' . $data['order']['ship_firstname'] . ' ' . $data['order']['ship_lastname'] . '</p>'.
+        '<p class="text-left">' . $data['order']['ship_email'] . '</p>'.
+        '<p class="text-left">' . $data['order']['ship_address1'] . '</p>'.
+        '<p class="text-left">' . $data['order']['ship_address2'] . '</p>'.
+        '<p class="text-left">' . $data['order']['ship_city'] . '</p>'.
+        '<p class="text-left">' . $data['order']['ship_zip'] . '</p>';
+
+
+        $message .=  '<table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Product Name
+                                    </th>
+                                    <th>
+                                        Quantity
+                                    </th>
+                                    <th>
+                                        Price
+                                    </th>
+                                    <th>
+                                        Total
+                                    </th>
+                                </tr>
+                            </thead>';
+
+                                foreach ($cart as $items):
+        $message .=           '
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        '. $items['id'] . ' 
+                                    </td>
+                                    <td>
+                                         '. $items['name']. '
+                                    </td>
+                                    <td>
+                                        ' . number_format($items['qty'], 0). '
+                                    </td>
+                                    <td>
+                                        ' . number_format($items['price'], 2). '
+                                    </td>
+                                    <td>
+                                        ' . number_format($items['subtotal'], 2) .'
+                                    </td>
+                                </tr>';
+                                    endforeach;
+        $message .=               '<tr class="success">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><strong>Grand total</strong></td>
+                                    <td>
+                                        <strong>' . number_format($order['total'], 2) . '</strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                    </table>';
+        return $message;
+    }
 }

@@ -116,7 +116,8 @@ class Admin_order extends CI_Controller
 );
         $this->grocery_crud->unset_back_to_list();
         $data = $this->grocery_crud->render();
-        $this->_example_output($data);
+        //$this->_example_output($data);
+        $this->load->view('admin/edit.php', $data);
     }
 
     function redirect($url)

@@ -7,7 +7,6 @@ if($this->session->flashdata('msg_error'))
         }
     if (!$this->session->userdata('email') && !$this->session->userdata('logged'))
     {
-        echo "not email set and not logged";
         if (!$this->session->userdata('address'))
         {
             echo "<h2>Add address for billing</h2>";

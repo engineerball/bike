@@ -114,6 +114,7 @@
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-default" name="submit">Sign in</button>
+      <a class="btn btn-default" href="/customer/reset_password">Forget password</a>
     </div>
   </div>
 <?php form_close(); ?>

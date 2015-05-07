@@ -42,6 +42,7 @@ class checkout extends CI_Controller {
 			{
                 $data['error'] = $show_error;
 				$data['main_content'] = 'checkout/formaddress_view';
+                $data['categories'] = $this->Category_model->get_categories();  
                 $this->load->view('includes/template', $data);
 			}
         }
@@ -56,6 +57,7 @@ class checkout extends CI_Controller {
                 }
 
                 $data['main_content'] = 'checkout/formaddress_view';
+                $data['categories'] = $this->Category_model->get_categories();  
                 $this->load->view('includes/template', $data);
 			}
 			else
@@ -236,6 +238,7 @@ class checkout extends CI_Controller {
                 $data['shipaddress'] = $this->Customer_model->get_shipaddress($customerid);
             }
             $this->cutStock($data['cart']);
+            $this->sendOrder($data);
             $this->cart->destroy();
             $data['main_content'] = 'checkout/summary_view';
             $data['categories'] = $this->Category_model->get_categories();   
@@ -260,6 +263,36 @@ class checkout extends CI_Controller {
         );
         $this->db->where('id', $productid);
         $this->db->update('products', $data);
+    }
+
+    function sendOrder($order)
+    {
+        if ( $this->session->userdata('logged'))
+        {
+            $email = $this->session->userdata('email');
+        } else {
+            $email = $order['order']['email'];
+        }
+
+            if ($email)
+            {
+                $cart = $this->cart->contents();
+                $message = $this->Order_model->printOrder($order, $cart);
+
+                $to=$email;
+                $subject="Order successful from Bike shop";
+                $from = 'info@engineerball.com';
+                $body='Hi, <br/> <br/>Your has been ordered product from '. base_url() . ' on time ' . $order['order']['ordered_on'] . '.' . '<br /><br />Your order number is <b>#' . $order['order']['order_number'].'</b><br />';
+                $body .= $message;
+                $headers = "From: " . strip_tags($from) . "\r\n";
+                $headers .= "Reply-To: ". strip_tags($from) . "\r\n";
+                $headers .= "MIME-Version: 1.0\r\n";
+                $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+                mail($to,$subject,$body,$headers);
+            }
+            else {
+                echo "Fail";
+            }
     }
 
     function show_addressform( $show_error = false ) {

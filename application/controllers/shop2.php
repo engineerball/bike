@@ -200,6 +200,20 @@ class Shop2 extends CI_Controller {
 #			redirect('renters/login');
 #		}
 	}
+
+  public function search()
+  {
+         // Retrieve the posted search term.
+        $search_term = $this->input->post('Search');
+
+        // Use a model to retrieve the results.
+        $data['products'] = $this->Product_model->get_search_results($search_term);
+        
+        $data['categories'] = $this->Category_model->get_categories();
+
+        $data['main_content'] = 'shop/index_view';
+        $this->load->view('includes/template', $data);
+  }
 				
 }
 /* End of file shopping.php */

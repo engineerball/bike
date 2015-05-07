@@ -68,4 +68,12 @@ Class Product_model extends CI_Model
         return (array)$product;
     }
 
+    function get_search_results($term)
+    {
+        $query = $this->db->select('*')->where('enabled =', 1)->where('quantity >', 0)->or_like('name',$term)->or_like('description', $term)->get('products');
+
+        // Return the results.
+        return $query->result();
+    }
+
 }
